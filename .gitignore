@@ -1,0 +1,35 @@
+# ==============================================================================
+# BeyondSensor Project Git Ignore Rules
+# ==============================================================================
+
+# CONFIDENTIAL & SENSITIVE TENDER DATA (Finances, Bid Pricing, Margins)
+01-planning/00-tender-review/06-sensitive/
+**/06-sensitive/
+*.sensitive.*
+
+# Environment Variables & Secrets
+.env
+.env*.local
+.env.production
+.env.development
+
+# Node / Dependency Directories
+node_modules/
+dist/
+build/
+.next/
+out/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.bak
+*~
+
+# IDE & Editor Directories
+.idea/
+.vscode/
+*.suo
+*.user

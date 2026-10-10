@@ -81,29 +81,26 @@ In Singapore public sector procurement for educational resource booking and asse
 
 ## 2. Competitive Comparison: BeyondSensor vs. Competitors
 
-| Evaluation Factor | Weight | COTS Resellers (Cheqroom) | Local Dev Houses | Open-Source Repackagers | BeyondSensor (Target S$ 84k) |
+| Evaluation Factor | Weight | COTS Resellers (Cheqroom) | Local Dev Houses | Open-Source Repackagers | BeyondSensor Technical Offering |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Track Record (Clause 2.1B)** | **10 Pts** | 🟡 5–8 Pts (Foreign refs) | 🔴 3–6 Pts (Few $\ge$ S$50k) | 🔴 0–4 Pts (Small projects) | 🟢 **10 / 10 Pts (MOE, URA, POLCAM, NEA)** |
 | **Live Demo (Clause 2.3)** | **50 Pts** | 🟢 40–45 Pts (Polished) | 🟡 30–40 Pts (Prototype) | 🔴 20–30 Pts (Clunky) | 🟢 **45–50 Pts (Bespoke modern UX)** |
 | **Smart Locker Hardware Integration** | Mandatory | 🔴 Poor (Refuse IoT APIs) | 🟡 Uncertain (Pure web devs) | 🔴 None | 🟢 **Native (IoT Core & Dual-Mode)** |
 | **PDPA Singapore Data Residency** | Mandatory | 🔴 High Risk (US/EU cloud) | 🟢 Compliant | 🟢 Compliant | 🟢 **100% Locked (AWS SG ap-southeast-1)** |
 | **1,000 Asset Tagging On-Site** | Mandatory | 🟡 High third-party cost | 🟢 Supported | 🟢 Supported | 🟢 **Field-tested (20,000+ POLCAM assets)** |
-| **Price Score Formula** | **40 Pts** | ~34–38 Pts | ~32–36 Pts | 🟢 38–40 Pts (Low-ball) | ~34–37 Pts (Healthy margin) |
+| **Price Score Formula** | **40 Pts** | Varies | Varies | 🟢 Low-ball pricing | Competitive |
 
 ---
 
-## 3. Why BeyondSensor Holds the "Winning Hand"
+## 3. Why BeyondSensor Holds the Technical Advantage
 
-1. **You Have Maxed Out Quality (Clause 2.1B):**
-   Most bidders in this S$50k–S$90k bracket are small web design shops that cannot produce 4 Singapore public sector contracts $\ge$ S$50k. Your portfolio with **MOE, URA, SPF, and NEA** guarantees an unbeatable **10/10 points**.
-2. **You Bridge the Hardware-Software Gap:**
+1. **Maxed Out Quality (Clause 2.1B):**
+   Most bidders in this category are small web design shops that cannot produce 4 Singapore public sector contracts $\ge$ S$50k. Your portfolio with **MOE, URA, SPF, and NEA** guarantees an unbeatable **10/10 points**.
+2. **Bridging the Hardware-Software Gap:**
    COTS software vendors can't handle physical smart lockers; smart locker hardware vendors can't build fluid academic booking portals. BeyondSensor has proven expertise in both **ground physical security operations** and **modern responsive web apps**.
-3. **The 15-Minute Demo is Your Ultimate Weapon:**
+3. **The 15-Minute Demo Advantage:**
    Because **50 out of 60 technical points** come down to the live demo, showing a lightning-fast, mobile-friendly Next.js/Tailwind web app with instant QR scanning will decisively defeat legacy COTS platforms and hacked open-source tools.
 
 ---
 
-## 4. Strategic Price Recommendation
-
-* **At S$ 84,000 SGD:** You capture maximum revenue ($81k+ gross margin) and comfortably win on Quality (60%) if your live demo is well-rehearsed.
-* **If You Want a "Guaranteed Lock" on Price:** Bidding **S$ 79,500 SGD** drops you just below the S$80k psychological barrier, edges out competitors on the 40% price formula, and still retains an enormous **S$ 75,000+ gross profit** for BeyondSensor!
+*(Note: Commercial pricing models, fee schedules, and tactical bid numbers are maintained confidentially in `06-sensitive/` and excluded from repository version control).*
