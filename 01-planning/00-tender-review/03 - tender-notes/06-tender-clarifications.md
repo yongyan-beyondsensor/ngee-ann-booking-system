@@ -31,16 +31,23 @@
 > *Context: Clause 1.2 and 10.4 require one-time migration of operational data in Excel/CSV format.*
 
 - [ ] **Q3.1 Data Cleansing & Schema:** Can FMS provide a sample/sanitized Excel or CSV data schema representing the current equipment inventory, user accounts, and historical bookings?
-- [ ] **Q3.2 Active Data Volume:** Approximately how many active student and staff user accounts need to be onboarded initially? How many distinct academic courses and modules will be active?
-- [ ] **Q3.3 Equipment Kits & Hierarchy:** Does the existing data distinguish between parent kits (e.g., camera package) and child sub-components (batteries, cables, lenses), and will serialized tracking be required for each sub-component?
+- [ ] **Q3.2 Total User Population & Role Sizing (Clause 9.1 & 9.3):** The tender does not state the total user base. Could FMS provide an estimated breakdown of the initial and ongoing user accounts to be onboarded:
+  - Total active **Students** across all diploma cohorts (Years 1 to 3)?
+  - Total **Lecturers / Academic Approvers**?
+  - Total **Technical Officers & Store Managers** across Block 52 (#01-01, #01-02, #01-03)?
+  - Total **Department Administrators**?
+  - What is the typical annual intake / turnover rate for incoming and graduating student cohorts?
+- [ ] **Q3.3 Peak Concurrent Users & Rush Hours:** What is the anticipated peak concurrent user volume (e.g., during semester module booking release days, final project loan rushes, or morning counter check-out peak hours)?
+- [ ] **Q3.4 Equipment Kits & Hierarchy:** Does the existing data distinguish between parent kits (e.g., camera package) and child sub-components (batteries, cables, lenses), and will serialized tracking be required for each sub-component?
 
 ---
 
-## 4. User Authentication & Future SSO (Clause 9.2)
-> *Context: Clause 9.2 states "Authentication shall be self-contained within the SaaS platform and shall not rely on external identity systems... The system shall be capable of supporting integration with Single Sign On (SSO) / Active Directory (AD), subject to future requirements..."*
+## 4. User Authentication, Licensing & Future SSO (Clause 9.2, 9.3 & Part C)
+> *Context: Clause 9.2 states "Authentication shall be self-contained within the SaaS platform and shall not rely on external identity systems... The system shall be capable of supporting integration with Single Sign On (SSO) / Active Directory (AD), subject to future requirements..." Part C quotes a single 1-Lot price for 36 months.*
 
-- [ ] **Q4.1 Initial Account Lifecycle:** Since authentication starts self-contained, how frequently will student rosters change (e.g., semesterly bulk CSV upload), and who will be responsible for sending initial password activation emails?
-- [ ] **Q4.2 Future SSO Protocol:** If NP exercises the option to integrate with SSO/AD in the future, what identity protocol will NP use (e.g., Microsoft Entra ID / Azure AD, SAML 2.0, or OpenID Connect)? Will that future integration be treated as a separate variation order or within the base contract?
+- [ ] **Q4.1 Licensing Model & User Seat Caps (Part C):** Since the tender quotation is structured as "1 Lot" for 36 months without user tiers, can FMS confirm that the quotation should cover unlimited / department-wide user accounts for FMS without per-user licensing fees or tiered user seat restrictions?
+- [ ] **Q4.2 Initial Account Provisioning & Activation:** In the self-contained authentication model, does FMS expect the SaaS system to automatically trigger account activation / password creation emails to student `@connect.np.edu.sg` and staff `@np.edu.sg` email addresses upon CSV roster import, or will account credentials be distributed internally?
+- [ ] **Q4.3 Future SSO Protocol & Integration Scope:** If NP exercises the option to integrate with SSO/AD in the future, what identity protocol will NP use (e.g., Microsoft Entra ID / Azure AD, SAML 2.0, or OpenID Connect)? Will that future integration be treated as a separate variation order or within the base contract?
 
 ---
 
