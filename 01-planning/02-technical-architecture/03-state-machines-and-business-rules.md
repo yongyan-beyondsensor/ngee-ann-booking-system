@@ -33,6 +33,7 @@ stateDiagram-v2
     PENDING_APPROVAL --> APPROVED : Auto-approved (Staff/Lecturer booking)
     PENDING_APPROVAL --> REJECTED : Lecturer rejects with comments
     PENDING_APPROVAL --> CANCELLED : Student cancels before review
+    PENDING_APPROVAL --> EXPIRED_UNAPPROVED : T-2h Lecturer inaction (Auto-release)
     
     APPROVED --> READY_FOR_COLLECTION : Store staff packs & stages gear
     APPROVED --> CANCELLED : Staff or Student cancels prior to staging
@@ -40,14 +41,19 @@ stateDiagram-v2
     READY_FOR_COLLECTION --> COLLECTED : Counter barcode scan OR Locker door opened
     READY_FOR_COLLECTION --> CANCELLED : Student fails to collect (Staging window expires)
     
-    COLLECTED --> COMPLETED : All items returned & inspected (Good condition)
-    COLLECTED --> COMPLETED : Items returned with minor damage (Incident ticket opened)
+    COLLECTED --> RETURNED_PENDING_INSPECTION : Locker after-hours return initiated
+    RETURNED_PENDING_INSPECTION --> COMPLETED : Morning audit verifies gear intact
+    RETURNED_PENDING_INSPECTION --> COMPLETED : Morning audit finds defect (Damage incident logged)
+    
+    COLLECTED --> COMPLETED : Counter return inspected & passed
+    COLLECTED --> COMPLETED : Counter return with damage (Damage incident logged)
     COLLECTED --> OVERDUE : Scheduled return time passed + 15m grace period
     
     OVERDUE --> COMPLETED : Overdue items finally returned (Strike issued)
     
     REJECTED --> [*]
     CANCELLED --> [*]
+    EXPIRED_UNAPPROVED --> [*]
     COMPLETED --> [*]
 ```
 
@@ -198,8 +204,16 @@ DECLARE
     v_threshold INT;
     v_suspension_days INT;
     v_diploma_id UUID;
+    v_current_semester_id UUID;
 BEGIN
-    -- 1. Identify student diploma and policy
+    -- 1. Identify active operational semester
+    SELECT id INTO v_current_semester_id 
+    FROM academic_semesters 
+    WHERE is_current = TRUE 
+       OR CURRENT_DATE BETWEEN start_date AND end_date
+    LIMIT 1;
+
+    -- 2. Identify student diploma and policy
     SELECT diploma_id INTO v_diploma_id FROM profiles WHERE id = NEW.user_id;
     
     SELECT strike_suspension_threshold, suspension_duration_days
@@ -211,13 +225,15 @@ BEGIN
     v_threshold := COALESCE(v_threshold, 3);
     v_suspension_days := COALESCE(v_suspension_days, 14);
     
-    -- 2. Calculate un-waived active strikes within current semester
+    -- 3. Calculate un-waived active strikes strictly within current semester (Tender scope)
     SELECT COALESCE(SUM(strike_count), 0)
     INTO v_active_strikes
     FROM user_penalties
-    WHERE user_id = NEW.user_id AND is_waived = FALSE;
+    WHERE user_id = NEW.user_id 
+      AND is_waived = FALSE
+      AND (semester_id = v_current_semester_id OR semester_id IS NULL);
     
-    -- 3. Enforce suspension if threshold reached
+    -- 4. Enforce suspension if threshold reached
     IF v_active_strikes >= v_threshold THEN
         UPDATE profiles
         SET is_suspended = TRUE,
@@ -265,6 +281,15 @@ $$ LANGUAGE plpgsql;
 - **Overdue Tier 1 (15 mins to 2 hours late):** Automated notification sent every 30 minutes. 1 penalty strike issued upon return.
 - **Overdue Tier 2 (> 2 hours late or overnight):** 2 penalty strikes issued. Immediate notification sent to the student’s module coordinator.
 - **Overdue Tier 3 (> 24 hours late / Uncontactable):** Immediate account lockout. Case escalated to FMS Department Academic Disciplinary Board.
+
+### 6.5 Student Eligibility & Authorization Invariant Pipeline (Clause 4.2, 5.1, 6.1, 8.1)
+- **The Protocol:** Before any reservation or cart hold is created in `bookings`, the system executes an atomic **5-Gate Eligibility Pipeline**:
+  1. **Gate 1 (Disciplinary Suspension):** Evaluates `profiles.is_suspended`. If `TRUE` and `NOW() < suspension_until`, all borrowing is blocked. If `NOW() >= suspension_until`, status auto-reinstates to `FALSE`.
+  2. **Gate 2 (Active Semester Enrollment):** Evaluates `student_enrollments` joined with `academic_semesters` (`is_current = TRUE`). The student must be actively matriculated in the current academic semester and can only submit bookings tagged to their officially enrolled module codes.
+  3. **Gate 3 (Curriculum Tier Gating):** Enforces diploma and module prerequisites on equipment categories (e.g. Tier 3 Cinema packages like ARRI/RED and Sound Stages are restricted to Year 3 `FSV` students enrolled in Advanced Cinematography; unauthorized gear is locked with required prerequisite tags).
+  4. **Gate 4 (Policy Quotas & Booking Horizon):** Compares requested dates against `loan_policies` mapped to the student's diploma and cohort year (e.g. Year 1 max 24h duration, max 7 days in advance; Year 2/3 max 72h duration, max 14 days in advance).
+  5. **Gate 5 (Concurrency Cap):** Verifies that $(\text{Items on Loan}) + (\text{Items in Cart}) + (\text{Active Approved Bookings}) \le \text{max\_simultaneous\_items}$ (e.g. max 4 items).
+- **Group Bookings Extension (Clause 4.2):** Gates 1, 2, and 4 are evaluated for **every secondary crew member** registered in `booking_members`. If any crew member is suspended or un-enrolled, the system rejects their addition to the production crew.
 
 ---
 

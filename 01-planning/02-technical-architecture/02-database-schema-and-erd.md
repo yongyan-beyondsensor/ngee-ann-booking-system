@@ -15,10 +15,15 @@ erDiagram
     profiles ||--o{ student_enrollments : "enrolls in"
     profiles ||--o{ module_coordinators : "lectures / coordinates"
     profiles ||--o{ bookings : "places"
+    profiles ||--o{ booking_members : "participates in"
     profiles ||--o{ user_penalties : "receives"
     diplomas ||--o{ profiles : "belongs to"
     diplomas ||--o{ academic_modules : "offers"
     diplomas ||--o{ loan_policies : "governed by"
+    
+    academic_semesters ||--o{ student_enrollments : "scopes"
+    academic_semesters ||--o{ user_penalties : "scopes"
+    academic_semesters ||--o{ facility_timetable_blocks : "spans"
     
     academic_modules ||--o{ module_coordinators : "assigned to"
     academic_modules ||--o{ student_enrollments : "contains"
@@ -26,7 +31,8 @@ erDiagram
     academic_modules ||--o{ facility_timetable_blocks : "holds"
     
     categories ||--o{ equipment : "classifies"
-    equipment ||--o{ equipment : "kit parent of"
+    equipment ||--o{ kit_components : "kit parent of"
+    equipment ||--o{ kit_components : "accessory item"
     equipment ||--o{ booking_items : "reserved in"
     equipment ||--o{ equipment_damage_incidents : "flags damage"
     equipment ||--o{ maintenance_records : "undergoes"
@@ -36,8 +42,10 @@ erDiagram
     facilities ||--o{ maintenance_records : "scheduled for"
     
     bookings ||--o{ booking_items : "contains"
+    bookings ||--o{ booking_members : "has members"
     bookings ||--o{ locker_assignments : "staged in"
     bookings ||--o{ equipment_damage_incidents : "generates"
+    bookings ||--o{ bookings : "parent recurring of"
     
     equipment_damage_incidents ||--o| maintenance_records : "spawns"
     
@@ -217,11 +225,12 @@ To ensure zero ambiguity during development, here is the complete plain-language
 ## 3. Core PostgreSQL Enums
 
 ```sql
--- Role Hierarchy
+-- Role Hierarchy (Tender Clause 9.1)
 CREATE TYPE user_role AS ENUM (
     'STUDENT',
     'LECTURER',
     'TECHNICAL_OFFICER',
+    'STORE_MANAGER',
     'ADMIN'
 );
 
@@ -241,7 +250,7 @@ CREATE TYPE equipment_type AS ENUM (
     'KIT_ACCESSORY'
 );
 
--- Booking Lifecycle States
+-- Booking Lifecycle States (Harmonized with State Machine FSM)
 CREATE TYPE booking_status AS ENUM (
     'DRAFT',
     'PENDING_APPROVAL',
@@ -249,9 +258,23 @@ CREATE TYPE booking_status AS ENUM (
     'READY_FOR_COLLECTION',
     'REJECTED',
     'COLLECTED',
+    'RETURNED_PENDING_INSPECTION',
     'OVERDUE',
     'COMPLETED',
-    'CANCELLED'
+    'CANCELLED',
+    'EXPIRED_UNAPPROVED'
+);
+
+-- Booking Classification Types (Tender Clause 4.2)
+CREATE TYPE booking_type AS ENUM (
+    'INDIVIDUAL',
+    'GROUP',
+    'RECURRING',
+    'COURSEWORK',
+    'PACKAGE',
+    'LOOSE_ITEM',
+    'ADHOC_ADMIN',
+    'BLOCK_PREBOOKING'
 );
 
 -- Fulfillment / Collection Channels
@@ -371,6 +394,19 @@ CREATE TYPE maintenance_type AS ENUM (
 | `created_at` | `TIMESTAMPTZ`| `NOT NULL DEFAULT NOW()` | Assignment timestamp. |
 | *Constraint* | `UNIQUE (module_id, lecturer_id)` | Prevents duplicate coordinator mappings. |
 
+#### `academic_semesters` (Academic Term Reference & Scope Anchor)
+> **What this table is designed to handle:**  
+> Serves as the authoritative calendar reference for institutional terms (e.g. `AY2026/27 Sem 1`). Scopes student enrollments, timetable holds, and crucially bounds penalty strike accumulation so that discipline points do not carry forward indefinitely across multi-year studies.
+
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `UUID` | `PRIMARY KEY DEFAULT gen_random_uuid()` | Unique identifier. |
+| `code` | `VARCHAR(30)` | `NOT NULL UNIQUE` | E.g. `AY2026/27-SEM1`. |
+| `name` | `VARCHAR(100)`| `NOT NULL` | Display title (e.g. `Academic Year 2026/2027 Semester 1`). |
+| `start_date` | `DATE` | `NOT NULL` | Official semester start date. |
+| `end_date` | `DATE` | `NOT NULL` | Official semester end date. |
+| `is_current` | `BOOLEAN` | `NOT NULL DEFAULT FALSE` | Flag indicating current active operational semester. |
+
 #### `student_enrollments` (Module Roster Ingestion)
 > **What this table is designed to handle:**  
 > Ingests semester class rosters (via CSV import) to track which students are actively enrolled in which module, class group (e.g. `FSV-2A`), and academic term. Enforces loan eligibility, guaranteeing that students can only reserve specialized equipment tiers authorized for their currently enrolled subjects.
@@ -380,9 +416,10 @@ CREATE TYPE maintenance_type AS ENUM (
 | `id` | `UUID` | `PRIMARY KEY DEFAULT gen_random_uuid()` | Unique identifier. |
 | `student_id` | `UUID` | `REFERENCES profiles(id) ON DELETE CASCADE` | Student profile ID. |
 | `module_id` | `UUID` | `REFERENCES academic_modules(id) ON DELETE CASCADE` | Enrolled module. |
+| `semester_id`| `UUID` | `REFERENCES academic_semesters(id) ON DELETE RESTRICT`| Academic semester scope. |
 | `class_group` | `VARCHAR(10)` | `NOT NULL` | E.g. `FSV-2A`. |
 | `semester` | `VARCHAR(20)` | `NOT NULL` | E.g. `AY2026/27 Sem 1`. |
-| *Constraint* | `UNIQUE (student_id, module_id, semester)` | Prevents duplicate enrollments. |
+| *Constraint* | `UNIQUE (student_id, module_id, semester_id)` | Prevents duplicate enrollments. |
 
 ---
 
@@ -424,6 +461,20 @@ CREATE TYPE maintenance_type AS ENUM (
 | `thumbnail_url`| `TEXT` | `NULLABLE` | Image hosted in Supabase Storage. |
 | `created_at` | `TIMESTAMPTZ`| `NOT NULL DEFAULT NOW()` | Asset onboarding timestamp. |
 | `updated_at` | `TIMESTAMPTZ`| `NOT NULL DEFAULT NOW()` | Asset update timestamp. |
+
+#### `kit_components` (Kit Composition & Accessory Manifest Junction)
+> **What this table is designed to handle:**  
+> Explicitly defines the assembly of package bookings and camera kits (Tender Clause 4.2 & 14.2). Enforces atomic kit checkout/returns and prevents individual child accessories (e.g. cinema lenses, V-mount batteries) from being booked separately or left in an inconsistent reservation state.
+
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `UUID` | `PRIMARY KEY DEFAULT gen_random_uuid()` | Unique identifier. |
+| `parent_kit_id` | `UUID` | `REFERENCES equipment(id) ON DELETE CASCADE` | Parent kit asset (`is_kit = TRUE`). |
+| `accessory_id` | `UUID` | `REFERENCES equipment(id) ON DELETE RESTRICT` | Child serialized equipment asset. |
+| `is_mandatory` | `BOOLEAN` | `NOT NULL DEFAULT TRUE` | If true, kit cannot be checked out without this component. |
+| `created_at` | `TIMESTAMPTZ`| `NOT NULL DEFAULT NOW()` | Component assignment timestamp. |
+| *Constraint* | `UNIQUE (parent_kit_id, accessory_id)` | Prevents duplicate component mappings. |
+| *Constraint* | `CHECK (parent_kit_id != accessory_id)` | Prevents self-reference recursion. |
 
 #### `facilities` (Studios, Edit Suites & Sound Stages)
 > **What this table is designed to handle:**  
@@ -467,7 +518,9 @@ CREATE TYPE maintenance_type AS ENUM (
 | :--- | :--- | :--- | :--- |
 | `id` | `UUID` | `PRIMARY KEY DEFAULT gen_random_uuid()` | Internal relational primary key. |
 | `booking_number`| `VARCHAR(30)` | `NOT NULL UNIQUE` | Human-friendly reference (`BK-202610-0042`). |
-| `user_id` | `UUID` | `REFERENCES profiles(id) ON DELETE CASCADE` | Student/Staff borrower profile. |
+| `booking_type` | `booking_type` | `NOT NULL DEFAULT 'INDIVIDUAL'` | Tender Clause 4.2 booking classification. |
+| `parent_recurring_id`| `UUID` | `REFERENCES bookings(id) ON DELETE CASCADE` | Parent anchor for recurring series bookings. |
+| `user_id` | `UUID` | `REFERENCES profiles(id) ON DELETE CASCADE` | Primary student/staff borrower profile. |
 | `module_id` | `UUID` | `REFERENCES academic_modules(id) ON DELETE RESTRICT` | Associated project course. |
 | `project_title` | `VARCHAR(200)`| `NOT NULL` | Brief description of coursework/shoot. |
 | `status` | `booking_status`| `NOT NULL DEFAULT 'DRAFT'` | Workflow state. |
@@ -480,8 +533,25 @@ CREATE TYPE maintenance_type AS ENUM (
 | `return_location`| `VARCHAR(200)`| `NULLABLE` | E.g. `Smart Locker Bank A` or `Store Counter Return Bay`. |
 | `qr_pass_token` | `TEXT` | `NULLABLE UNIQUE` | Signed JWT token rendered as offline QR pass. |
 | `qr_pass_expires`| `TIMESTAMPTZ`| `NULLABLE` | Token expiration boundary. |
+| `draft_expires_at`| `TIMESTAMPTZ`| `NULLABLE` | 15-minute ephemeral cart hold deadline (`NOW() + 15 mins`). |
+| `checkout_signature_url`| `TEXT`| `NULLABLE` | Clause 6.2 digital signature capture for checkout. |
+| `return_signature_url`| `TEXT` | `NULLABLE` | Clause 6.2 digital signature capture for return. |
+| `signer_name` | `VARCHAR(150)`| `NULLABLE` | Full name of student signing checkout/return. |
 | `created_at` | `TIMESTAMPTZ`| `NOT NULL DEFAULT NOW()` | Booking creation timestamp. |
 | `updated_at` | `TIMESTAMPTZ`| `NOT NULL DEFAULT NOW()` | Booking update timestamp. |
+
+#### `booking_members` (Group Booking Participant Roster & Shared Accountability)
+> **What this table is designed to handle:**  
+> Fulfills Tender Clause 4.2 mandatory requirement for "Group bookings". Links secondary student production crew members to a primary booking, ensuring shared accountability, preventing team members from double-booking concurrent quotas, and granting access permissions for QR pickup passes.
+
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `UUID` | `PRIMARY KEY DEFAULT gen_random_uuid()` | Unique identifier. |
+| `booking_id` | `UUID` | `REFERENCES bookings(id) ON DELETE CASCADE` | Target group reservation. |
+| `student_id` | `UUID` | `REFERENCES profiles(id) ON DELETE CASCADE` | Enrolled group crew member. |
+| `role_in_team`| `VARCHAR(50)` | `NOT NULL DEFAULT 'CREW'` | E.g. `DIRECTOR`, `CINEMATOGRAPHER`, `PRODUCER`, `CREW`. |
+| `created_at` | `TIMESTAMPTZ`| `NOT NULL DEFAULT NOW()` | Added timestamp. |
+| *Constraint* | `UNIQUE (booking_id, student_id)` | Prevents duplicate members in same booking. |
 
 #### `booking_items` (Reserved Assets with GiST Exclusion Guarantee)
 > **What this table is designed to handle:**  
@@ -505,16 +575,24 @@ CREATE TYPE maintenance_type AS ENUM (
 | `inspection_photos`| `TEXT[]` | `DEFAULT ARRAY[]::TEXT[]` | Supabase Storage photo URLs for damage/wear. |
 | `inspection_notes` | `TEXT` | `NULLABLE` | Counter officer observation notes. |
 
-##### GiST Concurrency Safeguard:
+##### GiST Concurrency Safeguard (With Ephemeral Cart Hold Support):
 ```sql
 -- Prevents overlapping active bookings for the SAME equipment item
+-- Excludes CANCELLED/REJECTED bookings AND expired DRAFT cart holds
 ALTER TABLE booking_items 
 ADD CONSTRAINT no_overlapping_equipment_bookings
 EXCLUDE USING gist (
     equipment_id WITH =,
     time_range WITH &&
 )
-WHERE (equipment_id IS NOT NULL AND status NOT IN ('CANCELLED', 'REJECTED'));
+WHERE (
+    equipment_id IS NOT NULL 
+    AND status NOT IN ('CANCELLED', 'REJECTED')
+    -- Expired drafts do not block new reservations
+    AND NOT (status = 'DRAFT' AND EXISTS (
+        SELECT 1 FROM bookings b WHERE b.id = booking_id AND b.draft_expires_at < NOW()
+    ))
+);
 
 -- Prevents overlapping active bookings for the SAME facility room
 ALTER TABLE booking_items 
@@ -523,7 +601,13 @@ EXCLUDE USING gist (
     facility_id WITH =,
     time_range WITH &&
 )
-WHERE (facility_id IS NOT NULL AND status NOT IN ('CANCELLED', 'REJECTED'));
+WHERE (
+    facility_id IS NOT NULL 
+    AND status NOT IN ('CANCELLED', 'REJECTED')
+    AND NOT (status = 'DRAFT' AND EXISTS (
+        SELECT 1 FROM bookings b WHERE b.id = booking_id AND b.draft_expires_at < NOW()
+    ))
+);
 ```
 
 ---
@@ -601,6 +685,7 @@ WHERE (facility_id IS NOT NULL AND status NOT IN ('CANCELLED', 'REJECTED'));
 | :--- | :--- | :--- | :--- |
 | `id` | `UUID` | `PRIMARY KEY DEFAULT gen_random_uuid()` | Unique identifier. |
 | `user_id` | `UUID` | `REFERENCES profiles(id) ON DELETE CASCADE` | Penalized user. |
+| `semester_id`| `UUID` | `REFERENCES academic_semesters(id) ON DELETE RESTRICT`| Academic term bounding penalty validity. |
 | `booking_id` | `UUID` | `REFERENCES bookings(id) ON DELETE SET NULL` | Triggering booking. |
 | `strike_count` | `INT` | `NOT NULL DEFAULT 1` | Strikes applied (1 to 3). |
 | `reason` | `VARCHAR(255)`| `NOT NULL` | E.g. `Overdue Return by 4 Hours`. |
@@ -673,6 +758,96 @@ EXCLUDE USING gist (
 WHERE (facility_id IS NOT NULL AND is_completed = FALSE);
 ```
 
+##### Cross-Table Concurrency Safeguards & Validation Triggers:
+```sql
+-- 1. Prevents scheduling a booking over an active maintenance outage, and vice versa
+CREATE OR REPLACE FUNCTION trg_check_maintenance_booking_collision()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- If inserting/updating a booking_item, check against active maintenance
+    IF TG_TABLE_NAME = 'booking_items' THEN
+        IF NEW.status NOT IN ('CANCELLED', 'REJECTED') THEN
+            IF NEW.item_type = 'EQUIPMENT' AND EXISTS (
+                SELECT 1 FROM maintenance_records 
+                WHERE equipment_id = NEW.equipment_id 
+                  AND is_completed = FALSE 
+                  AND time_range && NEW.time_range
+            ) THEN
+                RAISE EXCEPTION 'Asset % is scheduled for maintenance during the requested time window.', NEW.equipment_id;
+            ELSIF NEW.item_type = 'FACILITY' AND EXISTS (
+                SELECT 1 FROM maintenance_records 
+                WHERE facility_id = NEW.facility_id 
+                  AND is_completed = FALSE 
+                  AND time_range && NEW.time_range
+            ) THEN
+                RAISE EXCEPTION 'Facility % is scheduled for maintenance during the requested time window.', NEW.facility_id;
+            END IF;
+        END IF;
+    -- If inserting/updating a maintenance_record, check against active bookings
+    ELSIF TG_TABLE_NAME = 'maintenance_records' THEN
+        IF NEW.is_completed = FALSE THEN
+            IF NEW.item_type = 'EQUIPMENT' AND EXISTS (
+                SELECT 1 FROM booking_items 
+                WHERE equipment_id = NEW.equipment_id 
+                  AND status NOT IN ('CANCELLED', 'REJECTED') 
+                  AND time_range && NEW.time_range
+            ) THEN
+                RAISE EXCEPTION 'Equipment % has confirmed bookings during this maintenance window. Reassign bookings first.', NEW.equipment_id;
+            ELSIF NEW.item_type = 'FACILITY' AND EXISTS (
+                SELECT 1 FROM booking_items 
+                WHERE facility_id = NEW.facility_id 
+                  AND status NOT IN ('CANCELLED', 'REJECTED') 
+                  AND time_range && NEW.time_range
+            ) THEN
+                RAISE EXCEPTION 'Facility % has confirmed bookings during this maintenance window. Reassign bookings first.', NEW.facility_id;
+            END IF;
+        END IF;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_booking_items_maintenance_check
+BEFORE INSERT OR UPDATE ON booking_items
+FOR EACH ROW EXECUTE FUNCTION trg_check_maintenance_booking_collision();
+
+CREATE TRIGGER trg_maintenance_booking_check
+BEFORE INSERT OR UPDATE ON maintenance_records
+FOR EACH ROW EXECUTE FUNCTION trg_check_maintenance_booking_collision();
+
+-- 2. Enforces fulfillment compatibility (No facility items or oversized gear in Smart Lockers)
+CREATE OR REPLACE FUNCTION trg_validate_booking_fulfillment_compatibility()
+RETURNS TRIGGER AS $$
+DECLARE
+    v_has_facility BOOLEAN;
+    v_has_oversized BOOLEAN;
+BEGIN
+    IF NEW.collection_method = 'SMART_LOCKER' OR NEW.return_method = 'SMART_LOCKER' THEN
+        SELECT 
+            EXISTS (SELECT 1 FROM booking_items WHERE booking_id = NEW.id AND item_type = 'FACILITY'),
+            EXISTS (
+                SELECT 1 FROM booking_items bi 
+                JOIN equipment eq ON bi.equipment_id = eq.id 
+                WHERE bi.booking_id = NEW.id AND eq.is_oversized = TRUE
+            )
+        INTO v_has_facility, v_has_oversized;
+
+        IF v_has_facility THEN
+            RAISE EXCEPTION 'Bookings containing facility reservations cannot use Smart Locker fulfillment.';
+        END IF;
+        IF v_has_oversized THEN
+            RAISE EXCEPTION 'Bookings containing oversized equipment cannot use Smart Locker fulfillment.';
+        END IF;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_validate_fulfillment_channel
+BEFORE UPDATE OF collection_method, return_method ON bookings
+FOR EACH ROW EXECUTE FUNCTION trg_validate_booking_fulfillment_compatibility();
+```
+
 #### `audit_logs` (Immutable 36-Month Legal Audit Trail — Clause 3.0)
 > **What this table is designed to handle:**  
 > Fulfills the strict 36-month non-repudiation audit trail mandated by GeBIZ ITQ Clause 3.0. Captures an immutable, tamper-proof record of every single security-sensitive and operational action across the system: user logins, booking creations, status transitions, lecturer approvals, counter checkouts/returns, smart locker door releases, and administrative user overrides. Recorded with the acting user's ID, snapshot of their active role, client IP address, Singapore edge country headers, before-and-after change diffs (`metadata`), and exact server timestamps. Enforced by PostgreSQL triggers that strictly forbid `UPDATE` and `DELETE` queries.
@@ -706,12 +881,17 @@ USING (
 
 ### Policy: Students Manage Own Bookings (`bookings`)
 ```sql
-CREATE POLICY "Students can view and create their own bookings"
+CREATE POLICY "Students and members can view and create their own bookings"
 ON public.bookings FOR ALL
 TO authenticated
 USING (
     auth.uid() = user_id
-    OR (SELECT role FROM profiles WHERE id = auth.uid()) IN ('LECTURER', 'TECHNICAL_OFFICER', 'ADMIN')
+    OR EXISTS (
+        SELECT 1 FROM booking_members 
+        WHERE booking_members.booking_id = bookings.id 
+          AND booking_members.student_id = auth.uid()
+    )
+    OR (SELECT role FROM profiles WHERE id = auth.uid()) IN ('LECTURER', 'TECHNICAL_OFFICER', 'STORE_MANAGER', 'ADMIN')
 );
 ```
 
@@ -726,17 +906,18 @@ USING (
         WHERE module_coordinators.module_id = bookings.module_id
           AND module_coordinators.lecturer_id = auth.uid()
     )
+    OR (SELECT role FROM profiles WHERE id = auth.uid()) IN ('STORE_MANAGER', 'ADMIN')
 );
 ```
 
-### Policy: Audit Logs are Immutable
+### Policy: Audit Logs are Immutable & Retention-Compliant
 ```sql
 CREATE POLICY "Audit logs can only be inserted, never updated or deleted"
 ON public.audit_logs FOR INSERT
 TO authenticated
 WITH CHECK (true);
 
--- Revoke UPDATE and DELETE from all roles
+-- Revoke UPDATE and DELETE from all roles to enforce 36-month non-repudiation (Clause 3.0)
 REVOKE UPDATE, DELETE ON public.audit_logs FROM public, authenticated, anon;
 ```
 
@@ -748,12 +929,12 @@ ON public.maintenance_records FOR SELECT
 TO authenticated
 USING (true);
 
--- Only Technical Officers and Admins can create or update maintenance records
+-- Only Technical Officers, Store Managers, and Admins can create or update maintenance records
 CREATE POLICY "Store staff can manage maintenance records"
 ON public.maintenance_records FOR ALL
 TO authenticated
 USING (
-    (SELECT role FROM profiles WHERE id = auth.uid()) IN ('TECHNICAL_OFFICER', 'ADMIN')
+    (SELECT role FROM profiles WHERE id = auth.uid()) IN ('TECHNICAL_OFFICER', 'STORE_MANAGER', 'ADMIN')
 );
 ```
 
