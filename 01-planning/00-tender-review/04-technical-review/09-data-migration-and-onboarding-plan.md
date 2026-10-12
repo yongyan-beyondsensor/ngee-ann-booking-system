@@ -66,6 +66,7 @@ Month 1           Month 2           Month 3           Month 4           Month 5 
 ```
 
 ### Phase 1: Discovery, Schema Definition & Templates (Weeks 1 – 4)
+- **Pre-Award Sample Extract Request:** Formally request an anonymized sample extract (20–50 rows of CSV/JSON) during tender clarification to analyze real-world data "flavours" (kit nesting nuances, serial number conventions, store location formatting). Refer to [14-tender-clarification-questions-and-data-sample-request.md](file:///e:/dev/ngee-ann-booking-system/01-planning/00-tender-review/04-technical-review/14-tender-clarification-questions-and-data-sample-request.md).
 - **Standardized Excel/CSV Ingestion Templates:** Issue standardized, typed ingestion templates to FMS coordinators for inventory, user rosters, and modules.
 - **Data Gap Analysis:** Review FMS's historical records to identify missing fields (e.g. unrecorded serial numbers, orphaned modules, duplicate barcodes).
 - **Milestone 1 Deliverable:** *Approved Data Dictionary and Migration Mapping Specification.*

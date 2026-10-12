@@ -27,18 +27,25 @@
 
 ---
 
-## 3. Data Migration & Master Data Format (Clause 1.2 & 10.4)
+## 3. Data Migration, Master Data Format & Sample Dataset Request (Clause 1.2 & 10.4)
 > *Context: Clause 1.2 and 10.4 require one-time migration of operational data in Excel/CSV format.*
 
-- [ ] **Q3.1 Data Cleansing & Schema:** Can FMS provide a sample/sanitized Excel or CSV data schema representing the current equipment inventory, user accounts, and historical bookings?
-- [ ] **Q3.2 Total User Population & Role Sizing (Clause 9.1 & 9.3):** The tender does not state the total user base. Could FMS provide an estimated breakdown of the initial and ongoing user accounts to be onboarded:
+- [ ] **Q3.1 Anonymized Equipment Sample Dataset (CSV / JSON) & Data "Flavours" Discovery:**
+  - **Clarification Request:** To ensure optimal alignment of our database schema, kit hierarchies, and migration pipelines as required under Clause 1.2 and Clause 10.4, could FMS kindly provide an anonymized sample extract (approx. 20–50 rows in CSV or JSON format) of the current equipment inventory, asset tags, kit structures, and store room codes?
+  - **Intent & Engineering Rationale:** 
+    - **Nuance & Flavor Discovery:** Uncover real-world operational "flavours"—specifically how FMS tracks kit-accessory relationships (e.g. Sony FX6 body + batteries + charger + lenses: whether stored as comma-delimited strings, nested sub-items, or loose parent-child records), serial number formats (departmental prefixes, dashes, or un-serialized accessories), and Block 52 room codes (`#01-01`, `#01-02`, `#01-03`).
+    - **Custom ETL Pipeline Preparation:** Enables our engineering team to pre-build, test, and validate automated ingestion parsers prior to contract kickoff, reducing discovery risk and accelerating the 6-month Go-Live schedule.
+    - **High-Fidelity Demonstration:** Allows the vendor to seed the live demonstration environment with authentic FMS equipment models for the 15-minute tender evaluation session.
+  - **Suggested Fields of Interest:** `asset_tag_id`, `serial_number`, `brand`, `model_name`, `category`, `subcategory`, `item_type` (Kit Parent vs Loose Accessory), `parent_asset_tag`, `included_accessories`, `store_location`, `operational_status`, and `eligible_diploma`.
+- [ ] **Q3.2 Historical Booking & Transaction Data:** Does FMS require migrating active or historical booking records from previous semesters for trend analysis, or will data migration be strictly limited to master assets, facilities, modules, and user rosters?
+- [ ] **Q3.3 Total User Population & Role Sizing (Clause 9.1 & 9.3):** The tender does not state the total user base. Could FMS provide an estimated breakdown of the initial and ongoing user accounts to be onboarded:
   - Total active **Students** across all diploma cohorts (Years 1 to 3)?
   - Total **Lecturers / Academic Approvers**?
   - Total **Technical Officers & Store Managers** across Block 52 (#01-01, #01-02, #01-03)?
   - Total **Department Administrators**?
   - What is the typical annual intake / turnover rate for incoming and graduating student cohorts?
-- [ ] **Q3.3 Peak Concurrent Users & Rush Hours:** What is the anticipated peak concurrent user volume (e.g., during semester module booking release days, final project loan rushes, or morning counter check-out peak hours)?
-- [ ] **Q3.4 Equipment Kits & Hierarchy:** Does the existing data distinguish between parent kits (e.g., camera package) and child sub-components (batteries, cables, lenses), and will serialized tracking be required for each sub-component?
+- [ ] **Q3.4 Peak Concurrent Users & Rush Hours:** What is the anticipated peak concurrent user volume (e.g., during semester module booking release days, final project loan rushes, or morning counter check-out peak hours)?
+- [ ] **Q3.5 Equipment Kits & Hierarchy Tracking:** Does the existing data distinguish between parent packages (e.g. cinema camera rig) and child sub-components (batteries, cables, lenses), and will individual serialized tracking or barcode scanning be required for each loose sub-component during counter check-in/out?
 
 ---
 
