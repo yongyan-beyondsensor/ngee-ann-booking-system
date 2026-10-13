@@ -83,9 +83,18 @@
 
 ---
 
-## 8. My Notes / Additional Write-in Questions
-*(Space for your personal notes during the briefing)*
+## 8. Booking Types & Operational Logic (Clause 4.2)
+> *Context: Clause 4.2 lists 8 mandatory booking types (Individual, Group, Recurring, Course/module-based, Package kits, Loose items, Ad-hoc, Block/pre-bookings) without defining operational workflows, liability rules, or quota mechanisms.*
 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] **Q8.1 Group Bookings Operational Model & Shared Accountability:**
+  - Are student crew members registered as secondary participants under a primary applicant?
+  - Does the system evaluate individual borrowing quotas or a shared team quota?
+  - In case of loss or damage, is liability assigned to the primary borrower or shared across all tagged crew members?
+  - Can secondary crew members present their personal QR pass for pickup at store counter or smart lockers?
+- [ ] **Q8.2 Recurring & Ad-Hoc Bookings Governance:**
+  - Are recurring bookings restricted to academic staff/lecturers for studio labs, or can students request recurring equipment checkouts?
+  - For ad-hoc requests (e.g. vacation filming), does approval route to the Module Coordinator or Store Manager?
+- [ ] **Q8.3 Package Bundles vs. Loose Items Tracking:**
+  - For package kits (e.g. Cinema Camera kit), does FMS require serialized barcode scanning for every individual accessory at counter check-out/in, or is scanning the parent kit container tag sufficient unless an item is flagged missing?
+  - For loose items (sandbags, cables, C-stands), does FMS require batch quantity-based tracking without unique barcodes?
+
