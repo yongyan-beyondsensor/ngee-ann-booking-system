@@ -1,0 +1,104 @@
+# ==============================================================================
+# Ngee Ann Polytechnic (NP) FMS Booking System - Test Accounts & Emails
+# Target Domain: beyonddevelopers.com (Hosted on SiteGround)
+# Naming Prefix: np. (Isolates testing traffic and enables routing rules)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ACCOUNTS BY SYSTEM ROLE (RBAC CLASSIFICATION)
+# ------------------------------------------------------------------------------
+
+[ROLE: STUDENT]
+# Enrolled Diploma Students (FSV = Film, Sound & Video | MCM = Mass Comm | MPP = Media Post-Production)
+np.s10245001@beyonddevelopers.com       # Name: Chloe Lim    | Cohort: FSV Year 2 | Student ID: S10245001
+np.s10245002@beyonddevelopers.com       # Name: Lucas Tan    | Cohort: MCM Year 3 | Student ID: S10245002
+np.s10245003@beyonddevelopers.com       # Name: Ahmad Farhan | Cohort: MPP Year 1 | Student ID: S10245003
+
+[ROLE: LECTURER]
+# Academic Faculty, Module Coordinators & Final Year Project Supervisors
+np.marcus.wong@beyonddevelopers.com     # Dr. Marcus Wong (Module Coordinator - Advanced Cinematography)
+np.jennifer.tan@beyonddevelopers.com    # Jennifer Tan (Senior Lecturer - Sound & Audio Engineering)
+np.david.lim@beyonddevelopers.com       # David Lim (Lecturer & Final Year Project Supervisor)
+
+[ROLE: TECHNICAL_OFFICER]
+# Store Counter Staff & Locker Staging Technicians (Block 52 Store)
+np.tan.chee.wee@beyonddevelopers.com    # Tan Chee Wee (Senior Technical Officer - Counter Operations Lead)
+np.siti.rahmah@beyonddevelopers.com     # Siti Rahmah (Technical Officer - Equipment Inspection & Returns)
+np.ken.ng@beyonddevelopers.com          # Ken Ng (Technical Officer - Smart Locker Logistics & Staging)
+
+[ROLE: ADMIN]
+# Facilities Managers & System Administrators (Full Superuser & Audit Rights)
+np.fms.store.admin@beyonddevelopers.com # FMS Central Store Admin (General Operations & Bulk Rosters)
+np.elizabeth.quek@beyonddevelopers.com  # Elizabeth Quek (FMS Facilities & Asset Operations Manager)
+np.sysadmin.fms@beyonddevelopers.com    # System Administrator (IT Superuser & Compliance Auditor)
+
+# ------------------------------------------------------------------------------
+# 2. RAW EMAIL LIST (FOR COPY-PASTE / BULK SEEDING)
+# ------------------------------------------------------------------------------
+np.s10245001@beyonddevelopers.com
+np.s10245002@beyonddevelopers.com
+np.s10245003@beyonddevelopers.com
+np.marcus.wong@beyonddevelopers.com
+np.jennifer.tan@beyonddevelopers.com
+np.david.lim@beyonddevelopers.com
+np.tan.chee.wee@beyonddevelopers.com
+np.siti.rahmah@beyonddevelopers.com
+np.ken.ng@beyonddevelopers.com
+np.fms.store.admin@beyonddevelopers.com
+np.elizabeth.quek@beyonddevelopers.com
+np.sysadmin.fms@beyonddevelopers.com
+
+# ==============================================================================
+# DEVELOPER INTEGRATION & TESTING GUIDE
+# ==============================================================================
+#
+# A. HOW TO RECEIVE & CHECK TEST EMAILS ON SITEGROUND:
+# ------------------------------------------------------------------------------
+#  Option 1: Catch-All / Default Address (Fastest - No individual mailboxes needed)
+#    1. Log in to SiteGround -> Site Tools -> Email -> Default Address.
+#    2. Choose "Forward to Email Address" and enter your main developer inbox
+#       (e.g., dev@beyonddevelopers.com or your team email).
+#    3. Any email dispatched to "np.*@beyonddevelopers.com" will automatically land
+#       in that single inbox. No need to manage 12 individual accounts.
+#
+#  Option 2: Individual Email Forwarders
+#    1. SiteGround -> Site Tools -> Email -> Forwarders.
+#    2. Create forwarders for the specific test addresses forwarding to a single mailbox.
+#
+#  Option 3: Dedicated Mailboxes & Webmail
+#    1. SiteGround -> Site Tools -> Email -> Accounts.
+#    2. Access webmail at: https://webmail.beyonddevelopers.com or:
+#       https://tools.siteground.com (under Email > Accounts > Actions > Log in to Webmail).
+#    3. IMAP/SMTP Connection Details (for mail clients like Thunderbird / Apple Mail):
+#       - Incoming (IMAP): mail.beyonddevelopers.com | Port 993 (SSL/TLS)
+#       - Outgoing (SMTP): mail.beyonddevelopers.com | Port 465 (SSL/TLS)
+#       - Username: full email address
+#
+# B. DISPATCHING EMAILS VIA RESEND TEST SCRIPT:
+# ------------------------------------------------------------------------------
+#  From the repository root or script directory:
+#
+#    # Test single recipient using .env configuration:
+#    node test-resend.mjs re_your_api_key np.s10245001@beyonddevelopers.com
+#
+#  Important for Resend:
+#    To send emails to external addresses (like @beyonddevelopers.com), the domain
+#    "beyonddevelopers.com" or a subdomain must be verified in Resend Dashboard ->
+#    Domains (DKIM / SPF records added in SiteGround DNS Zone Editor).
+#
+# C. PROGRAMMATIC USAGE (NODE.JS / TYPESCRIPT SEEDING):
+# ------------------------------------------------------------------------------
+#  To import this file programmatically in seed scripts (e.g. Supabase Auth seeds):
+#
+#  ```ts
+#  import fs from 'node:fs';
+#  import path from 'node:path';
+#
+#  const raw = fs.readFileSync(path.resolve(__dirname, 'test-emails.txt'), 'utf-8');
+#  const emails = raw
+#    .split('\n')
+#    .map(line => line.trim())
+#    .filter(line => line.startsWith('np.') && line.includes('@beyonddevelopers.com'));
+#  // yields clean array of all 12 test email addresses
+#  ```
+# ==============================================================================
