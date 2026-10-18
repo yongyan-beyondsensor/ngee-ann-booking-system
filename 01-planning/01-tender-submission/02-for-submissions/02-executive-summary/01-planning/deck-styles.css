@@ -629,8 +629,9 @@ body {
   align-items: center;
   gap: 14px;
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0A0D14; /* Deep dark fill for maximum white logo contrast */
+  border: 1px solid rgba(230, 0, 122, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
   padding: 8px 18px;
   border-radius: 4px;
 }

@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BeyondSensor - Executive Summary Tender Presentation Deck (FMS)</title>
   <link rel="stylesheet" href="deck-styles.css">
+  <!-- Load modular slides registry directly: works seamlessly via file:// and http:// -->
+  <script src="slides/deck-registry.js"></script>
 </head>
 <body>
 
-  <!-- Slide Container: Dynamic Ingestion from slides/ folder -->
+  <!-- Slide Container -->
   <div id="deck-container">
     <div style="display: flex; align-items: center; justify-content: center; height: 100vh; color: #FFF; font-family: sans-serif;">
       Loading presentation slides...
@@ -25,58 +27,27 @@
   </div>
 
   <script>
-    // List of individual slide files structured in slides/ folder
-    const slideFiles = [
-      'slides/01-cover.html',
-      'slides/02a-company-profile.html',
-      'slides/02b-track-record.html',
-      'slides/03-understanding-needs.html',
-      'slides/04-architecture.html',
-      'slides/05-user-workflows.html',
-      'slides/06-notification-matrix.html',
-      'slides/07-delivery-sla.html',
-      'slides/08-ending.html'
-    ];
-
     let currentSlide = 1;
-    let totalSlides = slideFiles.length;
 
-    async function loadAllSlides() {
+    function renderDeck() {
       const container = document.getElementById('deck-container');
-      try {
-        const fetchPromises = slideFiles.map(async (file) => {
-          const res = await fetch(file);
-          if (!res.ok) throw new Error(`Failed to load ${file}`);
-          return await res.text();
-        });
-
-        const slidesHtml = await Promise.all(fetchPromises);
-        
-        // Populate container and normalize asset paths for master viewer context
-        container.innerHTML = slidesHtml.map((html, idx) => {
-          // Adjust relative paths if needed: in slides/ it was ../../assets, from root it's ../assets
-          let adjustedHtml = html.replace(/\.\.\/\.\.\/assets\//g, '../assets/');
-          // Ensure first slide is active
+      
+      if (window.DECK_SLIDES && window.DECK_SLIDES.length > 0) {
+        container.innerHTML = window.DECK_SLIDES.map((html, idx) => {
+          let adjustedHtml = html;
+          // Ensure first slide has active class
           if (idx === 0 && !adjustedHtml.includes(' active')) {
             adjustedHtml = adjustedHtml.replace('class="slide-viewport', 'class="slide-viewport active');
           }
           return adjustedHtml;
         }).join('\n');
 
-        totalSlides = document.querySelectorAll('.slide-viewport').length;
         showSlide(1);
-      } catch (err) {
-        console.warn('Fetch loading fallback (e.g. running from direct file:// without server):', err);
-        // If fetch is restricted by browser local file origin policy, display helpful note
+      } else {
         container.innerHTML = `
-          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; color: #FFF; font-family: sans-serif; text-align: center; padding: 20px;">
-            <h2 style="color: #FF54B0; margin-bottom: 10px;">Notice: Local Browser Security Policy</h2>
-            <p style="max-width: 600px; color: #CBD5E1; line-height: 1.5; margin-bottom: 20px;">
-              When opening directly via <code>file://</code> in some browsers, JavaScript <code>fetch()</code> to local folders may be restricted.
-            </p>
-            <p style="color: #94A3B8; font-size: 13px;">
-              You can run a quick local server (e.g., VS Code "Live Server" or <code>npx serve .</code>), or review individual slides directly in the <code>slides/</code> directory.
-            </p>
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; color: #FFF; font-family: sans-serif; text-align: center;">
+            <h3 style="color: #FF54B0;">Unable to load slide templates</h3>
+            <p style="color: #94A3B8;">Please check slides/deck-registry.js</p>
           </div>
         `;
       }
@@ -124,8 +95,11 @@
       }
     });
 
-    // Initialize slides on load
-    loadAllSlides();
+    // Render immediately on DOM load
+    document.addEventListener('DOMContentLoaded', renderDeck);
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+      renderDeck();
+    }
   </script>
 </body>
 </html>
