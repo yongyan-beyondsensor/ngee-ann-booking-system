@@ -20,7 +20,7 @@
   <!-- Deck Navigation & Presentation Engine Controls -->
   <div class="deck-controls">
     <button class="deck-btn" id="prevBtn" onclick="changeSlide(-1)">◀ Prev</button>
-    <div class="deck-status" id="slideStatus">Slide 1 of 9</div>
+    <div class="deck-status" id="slideStatus">Slide 1 of 11</div>
     <button class="deck-btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
     <button class="deck-btn" onclick="toggleFullscreen()" style="border-left: 1px solid rgba(255,255,255,0.2); margin-left: 6px;">⛶ Fullscreen</button>
     <button class="deck-btn" onclick="window.print()">🖨️ Print / PDF</button>
@@ -29,20 +29,42 @@
   <script>
     let currentSlide = 1;
 
+    function getInitialSlide(totalSlides) {
+      // 1. Try URL hash (e.g. #3 or #slide-3)
+      const hash = window.location.hash;
+      const match = hash.match(/\d+/);
+      if (match) {
+        const slideNum = parseInt(match[0], 10);
+        if (slideNum >= 1 && slideNum <= totalSlides) return slideNum;
+      }
+      // 2. Try localStorage
+      try {
+        const saved = localStorage.getItem('fms_deck_current_slide');
+        if (saved) {
+          const slideNum = parseInt(saved, 10);
+          if (slideNum >= 1 && slideNum <= totalSlides) return slideNum;
+        }
+      } catch (e) {
+        // localStorage might be unavailable or restricted in some file:// origins
+      }
+      return 1;
+    }
+
     function renderDeck() {
       const container = document.getElementById('deck-container');
       
       if (window.DECK_SLIDES && window.DECK_SLIDES.length > 0) {
         container.innerHTML = window.DECK_SLIDES.map((html, idx) => {
           let adjustedHtml = html;
-          // Ensure first slide has active class
-          if (idx === 0 && !adjustedHtml.includes(' active')) {
-            adjustedHtml = adjustedHtml.replace('class="slide-viewport', 'class="slide-viewport active');
-          }
+          // Clear any hardcoded active class from slide templates; active state is driven by showSlide
+          adjustedHtml = adjustedHtml.replace(/class=["']slide-viewport active["']/, 'class="slide-viewport"');
+          // Normalize image paths if they start with ../assets/ to assets/ so it works from root
+          adjustedHtml = adjustedHtml.replace(/src=["']\.\.\/assets\//g, 'src="assets/');
           return adjustedHtml;
         }).join('\n');
 
-        showSlide(1);
+        const initialSlide = getInitialSlide(window.DECK_SLIDES.length);
+        showSlide(initialSlide, false);
       } else {
         container.innerHTML = `
           <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; color: #FFF; font-family: sans-serif; text-align: center;">
@@ -53,7 +75,7 @@
       }
     }
 
-    function showSlide(n) {
+    function showSlide(n, updateHistory = true) {
       const slides = document.querySelectorAll('.slide-viewport');
       if (!slides.length) return;
       slides.forEach(el => el.classList.remove('active'));
@@ -63,6 +85,20 @@
         target.classList.add('active');
         currentSlide = n;
         document.getElementById('slideStatus').innerText = `Slide ${currentSlide} of ${slides.length}`;
+        
+        // Persist slide index across refreshes
+        try {
+          localStorage.setItem('fms_deck_current_slide', String(n));
+        } catch (e) {}
+
+        // Sync URL hash without polluting browser history when not desired
+        if (window.location.hash !== `#${n}`) {
+          if (updateHistory) {
+            history.pushState(null, '', `#${n}`);
+          } else {
+            history.replaceState(null, '', `#${n}`);
+          }
+        }
       }
     }
 
@@ -84,6 +120,18 @@
         }
       }
     }
+
+    window.addEventListener('hashchange', () => {
+      const slides = document.querySelectorAll('.slide-viewport');
+      if (!slides.length) return;
+      const match = window.location.hash.match(/\d+/);
+      if (match) {
+        const slideNum = parseInt(match[0], 10);
+        if (slideNum >= 1 && slideNum <= slides.length && slideNum !== currentSlide) {
+          showSlide(slideNum, false);
+        }
+      }
+    });
 
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {

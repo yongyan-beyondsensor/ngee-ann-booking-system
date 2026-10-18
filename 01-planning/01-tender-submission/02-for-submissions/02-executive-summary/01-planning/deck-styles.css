@@ -278,6 +278,10 @@ body {
   overflow: hidden;
 }
 
+.slide-content.compact {
+  padding: 18px 24px 14px 24px;
+}
+
 /* Slide Footer */
 .slide-footer {
   height: 44px;

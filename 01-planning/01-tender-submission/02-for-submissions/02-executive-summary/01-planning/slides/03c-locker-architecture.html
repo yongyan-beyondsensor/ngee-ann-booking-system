@@ -1,0 +1,111 @@
+<div class="slide-viewport theme-light" id="slide-7">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <span class="section-tag">Section 03C</span>
+      <div class="slide-title-group">
+        <h2>Smart Locker Architecture &amp; Operations</h2>
+        <span>24/7 Contactless Self-Service: Secure Compartment Control, Door Telemetry &amp; Offline Continuity</span>
+      </div>
+    </div>
+    <div class="slide-header-branding">
+      <div class="customer-logo-pill">
+        <img src="../../assets/design-references/ngee-ann-logo.png" alt="Ngee Ann Polytechnic">
+      </div>
+      <div class="brand-pill-logo">
+        <img src="../../assets/design-references/beyond-sensor-logo.png" alt="BeyondSensor Logo">
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-content compact">
+    <div style="display: grid; grid-template-columns: 1.62fr 1fr; gap: 14px; height: 100%;">
+      
+      <!-- LEFT: LOCKER ARCHITECTURE DIAGRAM CONTAINER (MAXIMIZED READABILITY & SPACE) -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; padding: 12px; height: 100%; overflow: hidden; background: #FFFFFF;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <div class="card-title" style="font-size: 13.5px; margin: 0; display: flex; align-items: center; gap: 6px;">
+            <span>🗄️</span> Smart Locker Hardware &amp; Controller Topology
+          </div>
+          <span class="badge-clean badge-emerald" style="font-size: 9.5px; font-weight: 700;">Block 52 Deployment</span>
+        </div>
+
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #F8FAFC; border: 1px solid var(--light-border); border-radius: 4px; overflow: hidden; padding: 8px;">
+          <img src="../assets/02-locker-architecture-overview.png" 
+               alt="Smart Locker Architecture Overview" 
+               style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 3px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.06));">
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--light-border); font-size: 10px; color: var(--light-text-muted);">
+          <span>Controller: Industrial Microcontroller + Relay Boards</span>
+          <span style="font-family: var(--font-mono); color: var(--color-emerald);">Hardware Watchdog &amp; UPS Protected</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: OPERATIONAL NOTES & LOCKER WORKFLOWS -->
+      <div style="display: flex; flex-direction: column; gap: 8px; height: 100%; justify-content: space-between;">
+        
+        <!-- Step 1: Allocation & Prep -->
+        <div class="card-clean" style="padding: 10px 12px; border-left: 3px solid var(--brand-magenta);">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <strong style="font-size: 11.5px; color: var(--light-text-heading);">1. Technical Officer Dispatch</strong>
+            <span class="badge-clean badge-magenta" style="font-size: 9px;">Counter iPad</span>
+          </div>
+          <p style="font-size: 10.5px; color: var(--light-text-body); line-height: 1.35; margin: 3px 0 0 0;">
+            Staff scans equipment barcodes, selects target locker compartment (S/M/L), deposits items, and closes the door. System generates an encrypted pickup token.
+          </p>
+        </div>
+
+        <!-- Step 2: Contactless Pickup -->
+        <div class="card-clean" style="padding: 10px 12px; border-left: 3px solid var(--color-blue);">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <strong style="font-size: 11.5px; color: var(--light-text-heading);">2. Contactless Pickup (OTP / QR)</strong>
+            <span class="badge-clean badge-blue" style="font-size: 9px;">24/7 Access</span>
+          </div>
+          <p style="font-size: 10.5px; color: var(--light-text-body); line-height: 1.35; margin: 3px 0 0 0;">
+            Borrower presents dynamic single-use QR or enters numeric OTP at the locker kiosk touch screen. Designated compartment door releases instantly.
+          </p>
+        </div>
+
+        <!-- Step 3: Door Telemetry & Sensors -->
+        <div class="card-clean" style="padding: 10px 12px; border-left: 3px solid var(--color-emerald);">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <strong style="font-size: 11.5px; color: var(--light-text-heading);">3. Sensor Verification &amp; Custody</strong>
+            <span class="badge-clean badge-emerald" style="font-size: 9px;">Real-Time</span>
+          </div>
+          <p style="font-size: 10.5px; color: var(--light-text-body); line-height: 1.35; margin: 3px 0 0 0;">
+            Magnetic reed switches and optical compartment sensors confirm door open/close cycles and asset withdrawal, logging exact timestamps to the cloud audit engine.
+          </p>
+        </div>
+
+        <!-- Step 4: Safety, Timeouts & Offline Override -->
+        <div class="card-clean" style="padding: 10px 12px; border-left: 3px solid var(--color-amber);">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <strong style="font-size: 11.5px; color: var(--light-text-heading);">4. Auto-Timeouts &amp; Manual Override</strong>
+            <span class="badge-clean badge-amber" style="font-size: 9px;">Fail-Safe</span>
+          </div>
+          <p style="font-size: 10.5px; color: var(--light-text-body); line-height: 1.35; margin: 3px 0 0 0;">
+            Unclaimed items trigger auto-expiry alerts after configurable time limits. Physical master keys and battery backup ensure uninterrupted access during campus power or network drops.
+          </p>
+        </div>
+
+        <!-- Bottom Highlight Box -->
+        <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 4px; padding: 8px 10px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 10.5px; font-weight: 700; color: #0369A1;">🌟 Solves After-Hours Friction</span>
+            <span style="font-size: 9px; font-family: var(--font-mono); color: #0284C7;">ZERO COUNTER CONGESTION</span>
+          </div>
+          <div style="font-size: 10px; color: #0369A1; margin-top: 2px; line-height: 1.3;">
+            Students shooting evening cinema projects pick up and return kits independently, freeing Technical Officers from manual after-hours queue management.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <div class="footer-meta">Smart Locker Architecture &amp; Hardware Operations • BeyondSensor</div>
+    <div class="slide-counter">03C / 11</div>
+  </div>
+</div>
