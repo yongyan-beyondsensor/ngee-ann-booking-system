@@ -142,12 +142,13 @@
 
 ### Slide 05: Cybersecurity, Data Residency & Compliance
 - **Slide Code:** `05 / 11`
-- **Theme:** Clean Tech Light (3-Column Architecture).
+- **Theme:** Clean Tech Light (3-Column Architecture with Governance Disclaimer).
 - **Core Message:** 100% Singapore Data Residency, GovTech IM8 alignment, enterprise-grade cloud security, and certified controls.
 - **Key Elements:**
   - **Vercel Cloud Edge (Web & PWA Tier):** Serverless architecture, Singapore PoP residency (sin1), TLS 1.2/1.3 cryptographic protection, automated GitHub CI/CD, ISO 27001 certified edge nodes, underlying AWS infrastructure.
   - **Supabase Core (Data, Auth & Storage Tier):** Hosted in AWS Singapore (ap-southeast-1), PostgreSQL with Row-Level Security (RLS), SSO/Auth integration, object storage for asset vouchers, point-in-time recovery & AES-256 encryption at rest, SOC 2 Type 2 certified.
   - **Overall Governance & AWS Cloud:** 100% Singapore data residency (no overseas replication), AWS cloud integrations & updates for IoT workers, hardened RBAC & MFA controls, 36-month tamper-evident immutable audit logs, ISO 27001 / ISO 27701 / SOC 2 compliance.
+  - **Certification Status & Experience Statement (Disclaimer Banner):** Transparent declaration that BeyondSensor is actively pursuing organizational ISO 27001 certification and continually open to enhancing operational posture. While in the certification pipeline, the platform is built on fully certified ISO 27001 / SOC 2 cloud infrastructure, backed by extensive team experience delivering high-security systems for Singapore government agencies (MOE, SPF/AETOS, URA, NEA).
 
 ### Slide 11: Strategic Partnership: Partner Pledge & Sign-Off
 - **Slide Code:** `11 / 11`
