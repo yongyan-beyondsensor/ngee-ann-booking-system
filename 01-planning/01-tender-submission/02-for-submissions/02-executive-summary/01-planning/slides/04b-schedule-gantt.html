@@ -1,0 +1,167 @@
+<div class="slide-viewport theme-light" id="slide-10">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <span class="section-tag">Section 04B</span>
+      <div class="slide-title-group">
+        <h2>Implementation Schedule &amp; Gantt Visuals</h2>
+        <span>Visualized 26-Week Master Timeline: Parallel Workstreams &amp; Key Stage-Gate Deliverables</span>
+      </div>
+    </div>
+    <div class="slide-header-branding">
+      <div class="customer-logo-pill">
+        <img src="../assets/design-references/ngee-ann-logo.png" alt="Ngee Ann Polytechnic">
+      </div>
+      <div class="brand-pill-logo">
+        <img src="../assets/design-references/beyond-sensor-logo.png" alt="BeyondSensor Logo">
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-content compact" style="padding: 16px 26px 12px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+    
+    <!-- Gantt Chart Card Container -->
+    <div class="card-clean featured" style="padding: 14px 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; background: #FFFFFF;">
+      
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div>
+            <div class="card-title" style="font-size: 13.5px; margin: 0;">📊 26-Week Multi-Track Schedule Gantt Chart</div>
+            <div class="card-subtitle" style="font-size: 10.5px; margin: 2px 0 0 0; color: var(--light-text-muted);">
+              Coordinated rollout covering software sprints, locker controller fabrication, and data migration
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <span class="badge-clean badge-magenta" style="font-size: 8.5px;">Discovery</span>
+            <span class="badge-clean badge-blue" style="font-size: 8.5px;">Software Dev</span>
+            <span class="badge-clean badge-green" style="font-size: 8.5px;">Smart Lockers</span>
+            <span class="badge-clean" style="background: #EEF2FF; color: #4F46E5; border: 1px solid #C7D2FE; font-size: 8.5px;">Tagging</span>
+            <span class="badge-clean" style="background: #FEF3C7; color: #B45309; border: 1px solid #FCD34D; font-size: 8.5px;">UAT &amp; Live</span>
+          </div>
+        </div>
+
+        <!-- Gantt Visual Grid -->
+        <div style="background: #F8FAFC; border: 1px solid var(--light-border); border-radius: 4px; padding: 12px 14px; overflow: hidden;">
+          
+          <!-- Month & Week Scale Header -->
+          <div style="display: grid; grid-template-columns: 210px repeat(6, 1fr); gap: 4px; padding-bottom: 8px; border-bottom: 1.5px solid var(--light-border); font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; color: var(--light-text-heading); text-align: center;">
+            <div style="text-align: left; font-family: var(--font-heading);">Track / Activity Stream</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M1 (W1-4)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M2 (W5-8)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M3 (W9-13)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M4 (W14-17)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M5 (W18-21)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M6 (W22-26)</div>
+          </div>
+
+          <!-- Gantt Row 1: Discovery & Approvals (Weeks 1-4) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">1. Discovery &amp; Scope Sign-Off</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">Site Survey • Role Matrices</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W1 to W4 (cols 1-4) -->
+              <div style="grid-column: 1 / span 4; background: linear-gradient(90deg, #FF54B0 0%, #C20078 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(194,0,120,0.3);">
+                4 Wks (T+0)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 2: Software & Cloud Provision (Weeks 4-15) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">2. Software &amp; Cloud Build</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">PWA Frontend • Supabase Core</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W4 to W15 (cols 4-15) -->
+              <div style="grid-column: 4 / span 12; background: linear-gradient(90deg, #38BDF8 0%, #0284C7 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(2,132,199,0.3);">
+                12 Weeks Sprints (T+3)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 3: Smart Locker Integration (Weeks 7-10) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">3. Smart Locker Integration</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">Hardware Controller • Telemetry</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W7 to W10 (cols 7-10) -->
+              <div style="grid-column: 7 / span 4; background: linear-gradient(90deg, #34D399 0%, #059669 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(5,150,105,0.3);">
+                4 Wks (T+6)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 4: Data Onboarding / Tagging (Week 19) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">4. Data Tagging &amp; Staging</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">1,000+ Barcodes • Bundles</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W19 (col 19) -->
+              <div style="grid-column: 19 / span 2; background: linear-gradient(90deg, #818CF8 0%, #4F46E5 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(79,70,229,0.3);">
+                1 Wk (T+18)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 5: UAT, Training & Cutover (Weeks 20-26) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">5. UAT, Handover &amp; Cutover</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">Staff Pilot • Go-Live Gate</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W20 to W26 (cols 20-26) -->
+              <div style="grid-column: 20 / span 7; background: linear-gradient(90deg, #FBBF24 0%, #D97706 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(217,119,6,0.3);">
+                6 Wks Pilot &amp; Go-Live (T+20)
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Critical Stage-Gate Highlights -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+        <div style="background: #FDF2F8; border: 1px solid #FBCFE8; border-radius: 4px; padding: 8px 10px;">
+          <strong style="font-size: 10.5px; color: var(--brand-magenta); display: block;">🎯 Parallel Engineering</strong>
+          <span style="font-size: 9.5px; color: var(--light-text-body); line-height: 1.35; display: block; margin-top: 2px;">
+            Software cloud build overlaps with hardware controller assembly from Week 7, cutting lead times by 30%.
+          </span>
+        </div>
+
+        <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 4px; padding: 8px 10px;">
+          <strong style="font-size: 10.5px; color: #0284C7; display: block;">📦 Low-Impact Data Tagging</strong>
+          <span style="font-size: 9.5px; color: var(--light-text-body); line-height: 1.35; display: block; margin-top: 2px;">
+            Barcode tagging executed in Week 19 prior to semester start, preventing teaching interruption.
+          </span>
+        </div>
+
+        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 4px; padding: 8px 10px;">
+          <strong style="font-size: 10.5px; color: #059669; display: block;">🛡️ Dedicated Buffer Window</strong>
+          <span style="font-size: 9.5px; color: var(--light-text-body); line-height: 1.35; display: block; margin-top: 2px;">
+            Generous 6-week UAT and pilot period guarantees staff familiarity before transition to maintenance phase.
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Status Note -->
+    <div style="border-top: 1px dashed var(--light-border); padding-top: 8px; margin-top: 8px; display: flex; align-items: center; justify-content: space-between;">
+      <span style="font-size: 10.5px; color: var(--light-text-heading); font-weight: 700;">✨ Schedule Commitment:</span>
+      <span style="font-size: 10px; color: var(--light-text-muted);">Total 26 Weeks with zero academic timetable conflict, culminating in seamless SLA maintenance transition.</span>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <div class="footer-meta">Implementation Schedule &amp; Gantt Visuals • BeyondSensor</div>
+    <div class="slide-counter">04B / 13</div>
+  </div>
+</div>

@@ -57,7 +57,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Ngee Ann Polytechnic FMS • Tender FY26</div>
-    <div class="slide-counter">01 / 11</div>
+    <div class="slide-counter">01 / 13</div>
   </div>
 </div>`,
 
@@ -234,7 +234,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Company Profile & Regional Footprint • Founded 2022</div>
-    <div class="slide-counter">02A / 11</div>
+    <div class="slide-counter">02A / 13</div>
   </div>
 </div>`,
 
@@ -403,7 +403,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Company Expertise & Core Services • BeyondSensor</div>
-    <div class="slide-counter">02B / 11</div>
+    <div class="slide-counter">02B / 13</div>
   </div>
 </div>`,
 
@@ -562,7 +562,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">100% Government Track Record • Full-Stack Management • 99%+ Uptime</div>
-    <div class="slide-counter">02C / 11</div>
+    <div class="slide-counter">02C / 13</div>
   </div>
 </div>`,
 
@@ -752,7 +752,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Requirements Understanding & Solution Framework • BeyondSensor</div>
-    <div class="slide-counter">03A / 11</div>
+    <div class="slide-counter">03A / 13</div>
   </div>
 </div>`,
 
@@ -866,7 +866,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">System Overview &amp; Cloud Platform Architecture • BeyondSensor</div>
-    <div class="slide-counter">03B / 11</div>
+    <div class="slide-counter">03B / 13</div>
   </div>
 </div>`,
 
@@ -980,7 +980,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Smart Locker Architecture &amp; Hardware Operations • BeyondSensor</div>
-    <div class="slide-counter">03C / 11</div>
+    <div class="slide-counter">03C / 13</div>
   </div>
 </div>`,
 
@@ -1081,19 +1081,18 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Event-Driven Notification System • BeyondSensor</div>
-    <div class="slide-counter">03D / 11</div>
+    <div class="slide-counter">03D / 13</div>
   </div>
 </div>`,
 
-  // SLIDE 4: PROJECT DELIVERY ROADMAP & SUPPORT SLA
-  `<!-- SLIDE 4: PROJECT DELIVERY ROADMAP & SUPPORT SLA -->
-<div class="slide-viewport theme-light" id="slide-9">
+  // SLIDE 4A: PROJECT MILESTONES & WORK BREAKDOWN
+  <div class="slide-viewport theme-light" id="slide-9">
   <div class="slide-header">
     <div class="slide-header-left">
-      <span class="section-tag">Section 04</span>
+      <span class="section-tag">Section 04A</span>
       <div class="slide-title-group">
-        <h2>Project Delivery Roadmap & Support SLA</h2>
-        <span>Structured 4-sprint rollout with zero semester disruption</span>
+        <h2>Project Milestones &amp; Work Breakdown</h2>
+        <span>6-Month (26-Week) Structured Delivery Schedule with Zero Operational Disruption</span>
       </div>
     </div>
     <div class="slide-header-branding">
@@ -1106,73 +1105,504 @@ window.DECK_SLIDES = [
     </div>
   </div>
 
-  <div class="slide-content">
-    <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; height: 100%;">
-      <!-- Roadmap -->
-      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div class="card-title">🗓️ 10-Week Implementation Roadmap</div>
-        
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="border-left: 3px solid var(--brand-magenta); padding-left: 10px;">
-            <strong style="font-size: 12.5px; color: var(--light-text-heading);">Weeks 1-2: Validation & Site Survey</strong>
-            <div style="font-size: 11.5px; color: var(--light-text-muted);">Block 52 locker sizing, store layout review, and role matrix.</div>
+  <div class="slide-content compact" style="padding: 16px 26px 12px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+    <!-- Top Milestone Grid (5 Phases) -->
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; flex: 1;">
+      
+      <!-- Phase 1 -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between; padding: 12px 11px; border-top: 3.5px solid var(--brand-magenta);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 10px; color: var(--brand-magenta); font-weight: 800;">PHASE 01</span>
+            <span class="badge-clean badge-magenta" style="font-size: 8.5px; padding: 1px 5px;">T+0 Wks</span>
           </div>
-
-          <div style="border-left: 3px solid var(--color-blue); padding-left: 10px;">
-            <strong style="font-size: 12.5px; color: var(--light-text-heading);">Weeks 3-6: Platform & Locker Build</strong>
-            <div style="font-size: 11.5px; color: var(--light-text-muted);">PWA interface, cloud backend, and Smart Locker IoT integration.</div>
+          <strong style="font-size: 12px; color: var(--light-text-heading); display: block; line-height: 1.25; margin-bottom: 6px;">
+            Discovery &amp; Approvals
           </div>
-
-          <div style="border-left: 3px solid var(--color-emerald); padding-left: 10px;">
-            <strong style="font-size: 12.5px; color: var(--light-text-heading);">Weeks 7-8: SIT / UAT & Asset Tagging</strong>
-            <div style="font-size: 11.5px; color: var(--light-text-muted);">Staff user testing, data migration, and on-site 1,000 asset tagging.</div>
+          <div style="background: var(--light-bg-subtle); border-radius: 3px; padding: 6px 8px; border: 1px solid var(--light-border); margin-bottom: 8px;">
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Duration: <strong>4 Weeks</strong></div>
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Window: Weeks 1 – 4</div>
           </div>
-
-          <div style="border-left: 3px solid #6366F1; padding-left: 10px;">
-            <strong style="font-size: 12.5px; color: var(--light-text-heading);">Weeks 9-10: Briefings & Semester Go-Live</strong>
-            <div style="font-size: 11.5px; color: var(--light-text-muted);">Faculty/student orientation, pilot dry run, official cutover.</div>
-          </div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px;">
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: var(--brand-magenta);">•</span>FMS Block 52 site survey &amp; measurements
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: var(--brand-magenta);">•</span>Stakeholder role permissions sign-off
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: var(--brand-magenta);">•</span>Finalized technical architecture baseline
+            </li>
+          </ul>
+        </div>
+        <div style="border-top: 1px dashed var(--light-border); padding-top: 6px; margin-top: 6px; font-size: 9.5px; color: var(--brand-magenta); font-weight: 700;">
+          Gate 1: Scope Sign-Off
         </div>
       </div>
 
-      <!-- SLA -->
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <div class="card-clean" style="flex: 1;">
-          <div class="card-title">🛡️ Maintenance & SLA Commitments</div>
-          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-            <div style="background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 6px; padding: 9px 12px;">
-              <div style="display: flex; justify-content: space-between;">
-                <strong style="color: #BE123C; font-size: 12px;">Severity 1 (Critical)</strong>
-                <span class="badge-clean badge-rose">&lt; 1 Hr Response</span>
-              </div>
-              <div style="font-size: 11px; color: #881337; margin-top: 2px;">Store desk or locker offline; immediate dispatch.</div>
-            </div>
-
-            <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 6px; padding: 9px 12px;">
-              <div style="display: flex; justify-content: space-between;">
-                <strong style="color: #0369A1; font-size: 12px;">Severity 2-3 (Standard)</strong>
-                <span class="badge-clean badge-blue">&lt; 4 Hrs Response</span>
-              </div>
-              <div style="font-size: 11px; color: #0C4A6E; margin-top: 2px;">Non-critical bug fixes, minor workflow queries.</div>
-            </div>
+      <!-- Phase 2 -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between; padding: 12px 11px; border-top: 3.5px solid var(--color-blue);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 10px; color: #0284C7; font-weight: 800;">PHASE 02</span>
+            <span class="badge-clean badge-blue" style="font-size: 8.5px; padding: 1px 5px;">T+3 Wks</span>
           </div>
-        </div>
-
-        <div class="card-clean" style="padding: 10px 14px;">
-          <div style="font-weight: 700; font-size: 12px; color: var(--light-text-heading);">📂 Accompanying Dossiers</div>
-          <div style="font-size: 11px; color: var(--light-text-muted); margin-top: 2px;">
-            Smart Locker Specs • System Architecture Blueprint • ISO 27001 Registry
+          <strong style="font-size: 12px; color: var(--light-text-heading); display: block; line-height: 1.25; margin-bottom: 6px;">
+            Software &amp; Cloud Build
           </div>
+          <div style="background: var(--light-bg-subtle); border-radius: 3px; padding: 6px 8px; border: 1px solid var(--light-border); margin-bottom: 8px;">
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Duration: <strong>12 Weeks</strong></div>
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Window: Weeks 4 – 15</div>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px;">
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #0284C7;">•</span>Multi-device PWA frontend development
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #0284C7;">•</span>Supabase PostgreSQL database &amp; RLS setup
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #0284C7;">•</span>Automated email/push notification hooks
+            </li>
+          </ul>
         </div>
+        <div style="border-top: 1px dashed var(--light-border); padding-top: 6px; margin-top: 6px; font-size: 9.5px; color: #0284C7; font-weight: 700;">
+          Gate 2: Sprint Builds Complete
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between; padding: 12px 11px; border-top: 3.5px solid var(--color-emerald);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 10px; color: #059669; font-weight: 800;">PHASE 03</span>
+            <span class="badge-clean badge-green" style="font-size: 8.5px; padding: 1px 5px;">T+6 Wks</span>
+          </div>
+          <strong style="font-size: 12px; color: var(--light-text-heading); display: block; line-height: 1.25; margin-bottom: 6px;">
+            Smart Locker Integration
+          </div>
+          <div style="background: var(--light-bg-subtle); border-radius: 3px; padding: 6px 8px; border: 1px solid var(--light-border); margin-bottom: 8px;">
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Duration: <strong>4 Weeks</strong></div>
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Window: Weeks 7 – 10</div>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px;">
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #059669;">•</span>Controller hardware &amp; relay board staging
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #059669;">•</span>Dynamic OTP / QR solenoid test bench
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #059669;">•</span>Door telemetry &amp; sensor loop validation
+            </li>
+          </ul>
+        </div>
+        <div style="border-top: 1px dashed var(--light-border); padding-top: 6px; margin-top: 6px; font-size: 9.5px; color: #059669; font-weight: 700;">
+          Gate 3: Hardware Verification
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between; padding: 12px 11px; border-top: 3.5px solid #6366F1;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 10px; color: #6366F1; font-weight: 800;">PHASE 04</span>
+            <span class="badge-clean" style="background: #EEF2FF; color: #4F46E5; border: 1px solid #C7D2FE; font-size: 8.5px; padding: 1px 5px;">T+18 Wks</span>
+          </div>
+          <strong style="font-size: 12px; color: var(--light-text-heading); display: block; line-height: 1.25; margin-bottom: 6px;">
+            Data Tagging &amp; Staging
+          </div>
+          <div style="background: var(--light-bg-subtle); border-radius: 3px; padding: 6px 8px; border: 1px solid var(--light-border); margin-bottom: 8px;">
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Duration: <strong>1 Week</strong></div>
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Window: Week 19</div>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px;">
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #6366F1;">•</span>1,000+ asset barcode / QR registration
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #6366F1;">•</span>Kit bundling &amp; serial number mapping
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #6366F1;">•</span>Store room location &amp; locker binding
+            </li>
+          </ul>
+        </div>
+        <div style="border-top: 1px dashed var(--light-border); padding-top: 6px; margin-top: 6px; font-size: 9.5px; color: #6366F1; font-weight: 700;">
+          Gate 4: Inventory Ready
+        </div>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between; padding: 12px 11px; border-top: 3.5px solid var(--color-amber);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 10px; color: #D97706; font-weight: 800;">PHASE 05</span>
+            <span class="badge-clean" style="background: #FEF3C7; color: #B45309; border: 1px solid #FCD34D; font-size: 8.5px; padding: 1px 5px;">T+20 Wks</span>
+          </div>
+          <strong style="font-size: 12px; color: var(--light-text-heading); display: block; line-height: 1.25; margin-bottom: 6px;">
+            UAT, Training &amp; Cutover
+          </div>
+          <div style="background: var(--light-bg-subtle); border-radius: 3px; padding: 6px 8px; border: 1px solid var(--light-border); margin-bottom: 8px;">
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Duration: <strong>6 Weeks</strong></div>
+            <div style="font-size: 9.5px; font-family: var(--font-mono); color: var(--light-text-muted);">Window: Weeks 20 – 26</div>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px;">
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #D97706;">•</span>Rigorous staff &amp; student pilot UAT
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #D97706;">•</span>Hands-on faculty / counter briefings
+            </li>
+            <li style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; position: relative; padding-left: 12px;">
+              <span style="position: absolute; left: 0; color: #D97706;">•</span>Cutover to production maintenance
+            </li>
+          </ul>
+        </div>
+        <div style="border-top: 1px dashed var(--light-border); padding-top: 6px; margin-top: 6px; font-size: 9.5px; color: #D97706; font-weight: 700;">
+          Gate 5: Handover &amp; SLA
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Timeline Summary Banner -->
+    <div style="background: #F8FAFC; border: 1px solid var(--light-border); border-radius: 4px; padding: 10px 16px; margin-top: 10px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 18px;">🗓️</span>
+        <div>
+          <strong style="font-size: 11.5px; color: var(--light-text-heading);">Total Implementation Window: 6 Months (26 Weeks)</strong>
+          <div style="font-size: 10px; color: var(--light-text-muted); margin-top: 1px;">Structured overlapping tracks ensure hardware, software, and physical data tagging converge seamlessly for semester go-live.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span class="badge-clean badge-magenta" style="font-size: 9px; font-weight: 700;">Zero Queue Target</span>
+        <span class="badge-clean badge-green" style="font-size: 9px; font-weight: 700;">Transition to Maintenance</span>
       </div>
     </div>
   </div>
 
   <div class="slide-footer">
-    <div class="footer-meta">Delivery Roadmap & Service Level Agreements • BeyondSensor</div>
-    <div class="slide-counter">04 / 11</div>
+    <div class="footer-meta">Project Delivery Milestones &amp; Work Breakdown • BeyondSensor</div>
+    <div class="slide-counter">04A / 13</div>
   </div>
-</div>`,
+</div>,
+
+  // SLIDE 4B: IMPLEMENTATION SCHEDULE & GANTT VISUALS
+  <div class="slide-viewport theme-light" id="slide-10">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <span class="section-tag">Section 04B</span>
+      <div class="slide-title-group">
+        <h2>Implementation Schedule &amp; Gantt Visuals</h2>
+        <span>Visualized 26-Week Master Timeline: Parallel Workstreams &amp; Key Stage-Gate Deliverables</span>
+      </div>
+    </div>
+    <div class="slide-header-branding">
+      <div class="customer-logo-pill">
+        <img src="../assets/design-references/ngee-ann-logo.png" alt="Ngee Ann Polytechnic">
+      </div>
+      <div class="brand-pill-logo">
+        <img src="../assets/design-references/beyond-sensor-logo.png" alt="BeyondSensor Logo">
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-content compact" style="padding: 16px 26px 12px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+    
+    <!-- Gantt Chart Card Container -->
+    <div class="card-clean featured" style="padding: 14px 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; background: #FFFFFF;">
+      
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div>
+            <div class="card-title" style="font-size: 13.5px; margin: 0;">📊 26-Week Multi-Track Schedule Gantt Chart</div>
+            <div class="card-subtitle" style="font-size: 10.5px; margin: 2px 0 0 0; color: var(--light-text-muted);">
+              Coordinated rollout covering software sprints, locker controller fabrication, and data migration
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <span class="badge-clean badge-magenta" style="font-size: 8.5px;">Discovery</span>
+            <span class="badge-clean badge-blue" style="font-size: 8.5px;">Software Dev</span>
+            <span class="badge-clean badge-green" style="font-size: 8.5px;">Smart Lockers</span>
+            <span class="badge-clean" style="background: #EEF2FF; color: #4F46E5; border: 1px solid #C7D2FE; font-size: 8.5px;">Tagging</span>
+            <span class="badge-clean" style="background: #FEF3C7; color: #B45309; border: 1px solid #FCD34D; font-size: 8.5px;">UAT &amp; Live</span>
+          </div>
+        </div>
+
+        <!-- Gantt Visual Grid -->
+        <div style="background: #F8FAFC; border: 1px solid var(--light-border); border-radius: 4px; padding: 12px 14px; overflow: hidden;">
+          
+          <!-- Month & Week Scale Header -->
+          <div style="display: grid; grid-template-columns: 210px repeat(6, 1fr); gap: 4px; padding-bottom: 8px; border-bottom: 1.5px solid var(--light-border); font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; color: var(--light-text-heading); text-align: center;">
+            <div style="text-align: left; font-family: var(--font-heading);">Track / Activity Stream</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M1 (W1-4)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M2 (W5-8)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M3 (W9-13)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M4 (W14-17)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M5 (W18-21)</div>
+            <div style="background: #FFFFFF; border: 1px solid var(--light-border); border-radius: 2px; padding: 3px 0;">M6 (W22-26)</div>
+          </div>
+
+          <!-- Gantt Row 1: Discovery & Approvals (Weeks 1-4) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">1. Discovery &amp; Scope Sign-Off</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">Site Survey • Role Matrices</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W1 to W4 (cols 1-4) -->
+              <div style="grid-column: 1 / span 4; background: linear-gradient(90deg, #FF54B0 0%, #C20078 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(194,0,120,0.3);">
+                4 Wks (T+0)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 2: Software & Cloud Provision (Weeks 4-15) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">2. Software &amp; Cloud Build</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">PWA Frontend • Supabase Core</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W4 to W15 (cols 4-15) -->
+              <div style="grid-column: 4 / span 12; background: linear-gradient(90deg, #38BDF8 0%, #0284C7 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(2,132,199,0.3);">
+                12 Weeks Sprints (T+3)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 3: Smart Locker Integration (Weeks 7-10) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">3. Smart Locker Integration</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">Hardware Controller • Telemetry</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W7 to W10 (cols 7-10) -->
+              <div style="grid-column: 7 / span 4; background: linear-gradient(90deg, #34D399 0%, #059669 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(5,150,105,0.3);">
+                4 Wks (T+6)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 4: Data Onboarding / Tagging (Week 19) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0; border-bottom: 1px solid #EDF2F7;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">4. Data Tagging &amp; Staging</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">1,000+ Barcodes • Bundles</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W19 (col 19) -->
+              <div style="grid-column: 19 / span 2; background: linear-gradient(90deg, #818CF8 0%, #4F46E5 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(79,70,229,0.3);">
+                1 Wk (T+18)
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt Row 5: UAT, Training & Cutover (Weeks 20-26) -->
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 4px; align-items: center; padding: 8px 0;">
+            <div>
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">5. UAT, Handover &amp; Cutover</strong>
+              <span style="font-size: 9px; color: var(--light-text-muted); font-family: var(--font-mono);">Staff Pilot • Go-Live Gate</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(26, 1fr); height: 20px; position: relative;">
+              <!-- Bar spans W20 to W26 (cols 20-26) -->
+              <div style="grid-column: 20 / span 7; background: linear-gradient(90deg, #FBBF24 0%, #D97706 100%); border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 8.5px; font-family: var(--font-mono); font-weight: 700; box-shadow: 0 1px 3px rgba(217,119,6,0.3);">
+                6 Wks Pilot &amp; Go-Live (T+20)
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Critical Stage-Gate Highlights -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+        <div style="background: #FDF2F8; border: 1px solid #FBCFE8; border-radius: 4px; padding: 8px 10px;">
+          <strong style="font-size: 10.5px; color: var(--brand-magenta); display: block;">🎯 Parallel Engineering</strong>
+          <span style="font-size: 9.5px; color: var(--light-text-body); line-height: 1.35; display: block; margin-top: 2px;">
+            Software cloud build overlaps with hardware controller assembly from Week 7, cutting lead times by 30%.
+          </span>
+        </div>
+
+        <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 4px; padding: 8px 10px;">
+          <strong style="font-size: 10.5px; color: #0284C7; display: block;">📦 Low-Impact Data Tagging</strong>
+          <span style="font-size: 9.5px; color: var(--light-text-body); line-height: 1.35; display: block; margin-top: 2px;">
+            Barcode tagging executed in Week 19 prior to semester start, preventing teaching interruption.
+          </span>
+        </div>
+
+        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 4px; padding: 8px 10px;">
+          <strong style="font-size: 10.5px; color: #059669; display: block;">🛡️ Dedicated Buffer Window</strong>
+          <span style="font-size: 9.5px; color: var(--light-text-body); line-height: 1.35; display: block; margin-top: 2px;">
+            Generous 6-week UAT and pilot period guarantees staff familiarity before transition to maintenance phase.
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Status Note -->
+    <div style="border-top: 1px dashed var(--light-border); padding-top: 8px; margin-top: 8px; display: flex; align-items: center; justify-content: space-between;">
+      <span style="font-size: 10.5px; color: var(--light-text-heading); font-weight: 700;">✨ Schedule Commitment:</span>
+      <span style="font-size: 10px; color: var(--light-text-muted);">Total 26 Weeks with zero academic timetable conflict, culminating in seamless SLA maintenance transition.</span>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <div class="footer-meta">Implementation Schedule &amp; Gantt Visuals • BeyondSensor</div>
+    <div class="slide-counter">04B / 13</div>
+  </div>
+</div>,
+
+  // SLIDE 4C: OPERATIONS MAINTENANCE & SUPPORT MODEL
+  <div class="slide-viewport theme-light" id="slide-11">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <span class="section-tag">Section 04C</span>
+      <div class="slide-title-group">
+        <h2>Operations Maintenance &amp; WhatsApp Support Model</h2>
+        <span>Direct Communication, Proactive Remote Telemetry &amp; Guaranteed 3-Day On-Site Response</span>
+      </div>
+    </div>
+    <div class="slide-header-branding">
+      <div class="customer-logo-pill">
+        <img src="../assets/design-references/ngee-ann-logo.png" alt="Ngee Ann Polytechnic">
+      </div>
+      <div class="brand-pill-logo">
+        <img src="../assets/design-references/beyond-sensor-logo.png" alt="BeyondSensor Logo">
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-content compact" style="padding: 16px 26px 12px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+    
+    <div style="display: grid; grid-template-columns: 1.15fr 1.35fr; gap: 14px; flex: 1;">
+      
+      <!-- Left Column: Core Communication & Upkeep -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between; padding: 14px 14px; border-top: 3.5px solid #25D366;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 22px;">💬</span>
+              <strong style="font-size: 13.5px; color: var(--light-text-heading);">Core Channel: WhatsApp Business</strong>
+            </div>
+            <span class="badge-clean" style="background: #DCF8C6; color: #128C7E; border: 1px solid #A7F3D0; font-size: 8.5px; font-weight: 700;">Direct &amp; Instant</span>
+          </div>
+          <div class="card-subtitle" style="font-size: 10.5px; margin-bottom: 10px; color: #075E54;">
+            Zero Support Gatekeepers • Real-Time Staff Escalation
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="background: var(--light-bg-subtle); border-radius: 4px; padding: 8px 10px; border: 1px solid var(--light-border);">
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">📱 Dedicated FMS WhatsApp Support Group</strong>
+              <p style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; margin: 2px 0 0 0;">
+                All operational queries, bug reports, and urgent locker alerts routed directly into a shared group with BeyondSensor lead engineers.
+              </p>
+            </div>
+
+            <div style="background: var(--light-bg-subtle); border-radius: 4px; padding: 8px 10px; border: 1px solid var(--light-border);">
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">⚡ Sub-15 Minute Acknowledgement</strong>
+              <p style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; margin: 2px 0 0 0;">
+                Fast human response without tedious ticket portals or slow multi-day email chains.
+              </p>
+            </div>
+
+            <div style="background: var(--light-bg-subtle); border-radius: 4px; padding: 8px 10px; border: 1px solid var(--light-border);">
+              <strong style="font-size: 11px; color: var(--light-text-heading); display: block;">🔄 Upkeep &amp; Continuous Support</strong>
+              <p style="font-size: 10px; color: var(--light-text-body); line-height: 1.35; margin: 2px 0 0 0;">
+                Includes monthly cloud security patching, database optimization, and semester blackout calendar adjustments.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 3px; padding: 6px 10px; margin-top: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 9.5px; font-weight: 700; color: #166534;">Primary Point of Contact:</span>
+            <span style="font-family: var(--font-mono); font-size: 9px; color: #15803D;">yy.foo@beyondsensor.com</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Locker Maintenance (Remote First + 3-Day On-Site Fallback) -->
+      <div class="card-clean featured" style="display: flex; flex-direction: column; justify-content: space-between; padding: 14px 14px; border-top: 3.5px solid var(--brand-magenta); background: #FFFFFF;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 22px;">🗄️</span>
+              <strong style="font-size: 13.5px; color: var(--light-text-heading);">Smart Locker Maintenance SOP</strong>
+            </div>
+            <span class="badge-clean badge-magenta" style="font-size: 8.5px; font-weight: 700;">Two-Tier Resolution</span>
+          </div>
+          <div class="card-subtitle" style="font-size: 10.5px; margin-bottom: 10px; color: var(--brand-magenta);">
+            Remote-First Diagnostics with Guaranteed On-Site Response
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <!-- Tier 1: Remote -->
+            <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 4px; padding: 8px 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="color: #0369A1; font-size: 11px;">Tier 1: Proactive Remote Diagnostics</strong>
+                <span class="badge-clean badge-blue" style="font-size: 8px; padding: 1px 5px;">&lt; 1 Hr Triage</span>
+              </div>
+              <p style="font-size: 10px; color: #0C4A6E; line-height: 1.35; margin: 3px 0 0 0;">
+                All Block 52 controllers broadcast live heartbeat telemetry. Firmware reboots, sensor overrides, and token regenerations handled remotely within minutes.
+              </p>
+            </div>
+
+            <!-- Tier 2: On-Site Fallback -->
+            <div style="background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 4px; padding: 8px 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="color: #BE123C; font-size: 11px;">Tier 2: On-Site Physical Fallback</strong>
+                <span class="badge-clean badge-rose" style="font-size: 8px; padding: 1px 5px;">Within 3 Working Days</span>
+              </div>
+              <p style="font-size: 10px; color: #881337; line-height: 1.35; margin: 3px 0 0 0;">
+                If hardware failure or physical mechanical issues cannot be cleared remotely, BeyondSensor dispatches a certified technician for on-site repair within <strong>3 working days</strong>.
+              </p>
+            </div>
+
+            <!-- Tier 3: Critical Emergencies -->
+            <div style="background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 4px; padding: 8px 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="color: #92400E; font-size: 11px;">Offline Safeguard: Mechanical Master Key</strong>
+                <span class="badge-clean" style="background: #FDE68A; color: #78350F; border: 1px solid #F59E0B; font-size: 8px; padding: 1px 5px;">Zero Locked Equipment</span>
+              </div>
+              <p style="font-size: 10px; color: #78350F; line-height: 1.35; margin: 3px 0 0 0;">
+                Physical brass master keys remain with FMS Store Managers at all times, guaranteeing immediate manual gear retrieval even during power outages.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px dashed var(--light-border); padding-top: 6px; margin-top: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 9.5px; color: var(--light-text-heading); font-weight: 700;">SLA Commitment:</span>
+          <span style="font-size: 9.5px; color: var(--light-text-muted);">99.9% Software Uptime • Continuous WhatsApp Escalation • 3-Day On-Site Max</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Reference Pill -->
+    <div style="background: #F8FAFC; border: 1px solid var(--light-border); border-radius: 4px; padding: 8px 14px; margin-top: 10px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 14px;">📂</span>
+        <span style="font-size: 10px; color: var(--light-text-body);">
+          <strong>Accompanying Maintenance Dossiers:</strong> Preventive Maintenance Checklist • Smart Locker Hardware SLA • Remote Support Escalation Protocol
+        </span>
+      </div>
+      <span class="badge-clean badge-magenta" style="font-size: 8.5px; font-weight: 700;">Singapore Direct Team</span>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <div class="footer-meta">Operations Maintenance &amp; WhatsApp Support Model • BeyondSensor</div>
+    <div class="slide-counter">04C / 13</div>
+  </div>
+</div>,
 
   // SLIDE 5: CYBERSECURITY, DATA RESIDENCY & COMPLIANCE
   `<!-- SLIDE 5: CYBERSECURITY, DATA RESIDENCY & COMPLIANCE -->
@@ -1373,7 +1803,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Cybersecurity, Data Residency &amp; Compliance • BeyondSensor</div>
-    <div class="slide-counter">05 / 11</div>
+    <div class="slide-counter">05 / 13</div>
   </div>
 </div>`,
 
@@ -1459,7 +1889,7 @@ window.DECK_SLIDES = [
 
   <div class="slide-footer">
     <div class="footer-meta">Ngee Ann Polytechnic FMS • Tender Submission FY26</div>
-    <div class="slide-counter">11 / 11</div>
+    <div class="slide-counter">11 / 13</div>
   </div>
 </div>`
 ];
