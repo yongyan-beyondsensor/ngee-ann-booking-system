@@ -230,12 +230,22 @@ body {
   align-items: center;
   gap: 8px;
   height: 28px;
+  background: #0A0D14; /* Deep dark fill to make white logo text pop */
+  border: 1px solid rgba(230, 0, 122, 0.4); /* subtle magenta brand edge */
+  padding: 3px 10px;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
 .brand-pill-logo img {
-  height: 20px;
+  height: 18px;
   width: auto;
   object-fit: contain;
+}
+
+.theme-dark .brand-pill-logo {
+  background: rgba(10, 13, 20, 0.85);
+  border-color: rgba(255, 84, 176, 0.5);
 }
 
 .customer-logo-pill {
@@ -601,6 +611,160 @@ body {
   color: #E2E8F0;
   padding: 0 10px;
 }
+
+/* ==========================================================================
+   SLIDE COMPONENT HELPERS & BADGES
+   ========================================================================== */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 40px;
+}
+.hero-logo-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 18px;
+  border-radius: 4px;
+}
+.hero-main-title {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.hero-sub-title {
+  font-size: 17px;
+  color: #F472B6;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.hero-meta-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(18, 9, 25, 0.75);
+  border: 1px solid rgba(230, 0, 122, 0.35);
+  border-radius: 4px;
+  padding: 10px 22px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #E2E8F0;
+}
+.hero-badges-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 26px;
+}
+.hero-pill-badge {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 12px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: #CBD5E1;
+  font-family: var(--font-mono);
+}
+.bullet-compact {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+.bullet-compact li {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--light-text-body);
+  position: relative;
+  padding-left: 20px;
+}
+.bullet-compact li::before {
+  content: "■";
+  color: var(--brand-magenta);
+  position: absolute;
+  left: 2px;
+  font-size: 10px;
+  top: 3px;
+}
+.bullet-compact li strong {
+  color: var(--light-text-heading);
+  display: block;
+  font-size: 13.5px;
+  margin-bottom: 2px;
+}
+.geo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  border-radius: 3px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--light-text-heading);
+}
+.record-card {
+  background: #FFFFFF;
+  border: 1px solid var(--light-border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 3px solid var(--brand-magenta);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+.record-client {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--light-text-heading);
+}
+.record-value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-magenta);
+  background: #FDF2F8;
+  border: 1px solid #FBCFE8;
+  padding: 2px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.cap-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 3px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--light-text-heading);
+}
+.cap-badge strong {
+  color: var(--brand-magenta);
+}
+
 
 /* ==========================================================================
    PRINT / PDF RULES (Strict 4:3 Aspect Page Break)
