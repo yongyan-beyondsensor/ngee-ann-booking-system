@@ -58,8 +58,8 @@
           let adjustedHtml = html;
           // Clear any hardcoded active class from slide templates; active state is driven by showSlide
           adjustedHtml = adjustedHtml.replace(/class=["']slide-viewport active["']/, 'class="slide-viewport"');
-          // Normalize image paths if they start with ../assets/ to assets/ so it works from root
-          adjustedHtml = adjustedHtml.replace(/src=["']\.\.\/assets\//g, 'src="assets/');
+          // Normalize image paths if they start with ../assets/ or ../../assets/ to assets/ so it works from root
+          adjustedHtml = adjustedHtml.replace(/src=["'](?:\.\.\/)+assets\//g, 'src="assets/');
           return adjustedHtml;
         }).join('\n');
 

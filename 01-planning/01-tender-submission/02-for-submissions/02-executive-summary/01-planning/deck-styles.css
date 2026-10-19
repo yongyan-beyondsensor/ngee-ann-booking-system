@@ -57,6 +57,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 
 body {
@@ -772,29 +774,166 @@ body {
 
 
 /* ==========================================================================
-   PRINT / PDF RULES (Strict 4:3 Aspect Page Break)
+   PRINT / PDF RULES (Strict 4:3 Aspect Page Break & High-Fidelity Color Engine)
    ========================================================================== */
+@page {
+  size: 10in 7.5in; /* 4:3 landscape ratio */
+  margin: 0mm;
+}
+
 @media print {
-  body {
-    background: none;
-    padding: 0;
+  *, *:before, *:after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
+
+  html, body {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #090B12 !important; /* Keep navy edge if visible */
+    font-family: var(--font-body) !important;
+  }
+
   .deck-controls {
     display: none !important;
   }
+
+  /* Display every slide on its own 4:3 page */
   .slide-viewport {
     display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    page-break-before: always;
     page-break-after: always;
     page-break-inside: avoid;
-    width: 100vw !important;
-    height: 75vw !important; /* Strict 4:3 */
-    max-height: 100vh !important;
+    break-before: page;
+    break-after: page;
+    break-inside: avoid;
+    width: 10in !important;
+    height: 7.5in !important;
+    min-width: 10in !important;
+    min-height: 7.5in !important;
+    max-width: 10in !important;
+    max-height: 7.5in !important;
     box-shadow: none !important;
     border: none !important;
     border-radius: 0 !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    position: relative !important;
   }
-  @page {
-    size: 10in 7.5in;
-    margin: 0;
+
+  /* Avoid initial extra blank page before first slide */
+  .slide-viewport:first-of-type {
+    page-break-before: auto !important;
+    break-before: auto !important;
+  }
+
+  /* Enforce theme-dark cover and ending backgrounds */
+  .slide-viewport.theme-dark {
+    background-color: #090B12 !important;
+    background-image: radial-gradient(circle at 85% 15%, rgba(230, 0, 122, 0.22) 0%, transparent 50%),
+                      radial-gradient(circle at 15% 85%, rgba(138, 0, 84, 0.25) 0%, transparent 55%),
+                      linear-gradient(135deg, #090B12 0%, #111422 100%) !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Enforce theme-light body background */
+  .slide-viewport.theme-light {
+    background-color: #F8FAFC !important;
+    color: #334155 !important;
+  }
+
+  /* Header and Footer backgrounds in print */
+  .slide-viewport.theme-dark .slide-header,
+  .slide-viewport.theme-dark .slide-footer {
+    background: transparent !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .slide-viewport.theme-light .slide-header,
+  .slide-viewport.theme-light .slide-footer {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+  }
+
+  /* Logo pill backgrounds in print */
+  .brand-pill-logo {
+    background-color: #0A0D14 !important;
+    border-color: rgba(230, 0, 122, 0.5) !important;
+    box-shadow: none !important;
+  }
+
+  .customer-logo-pill {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: none !important;
+  }
+
+  .hero-logo-box {
+    background-color: #0A0D14 !important;
+    border-color: rgba(230, 0, 122, 0.5) !important;
+    box-shadow: none !important;
+  }
+
+  /* Card backgrounds in print */
+  .card-clean {
+    background-color: #FFFFFF !important;
+  }
+
+  .card-clean.featured {
+    background-color: #FFFFFF !important;
+  }
+
+  /* Badge colors in print */
+  .badge-clean, .hero-pill-badge, .brand-pill {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hero & Dark Mode Elements print support */
+  .hero-meta-bar {
+    background-color: #120919 !important;
+    border-color: rgba(230, 0, 122, 0.45) !important;
+    color: #E2E8F0 !important;
+  }
+
+  .hero-pill-badge {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    color: #FFFFFF !important;
+  }
+
+  .theme-dark .hero-main-title,
+  .theme-dark h1,
+  .theme-dark h2 {
+    color: #FFFFFF !important;
+  }
+
+  .theme-dark .hero-sub-title {
+    color: #F472B6 !important;
+  }
+
+  /* Ending Slide (Slide 11) Elements print support */
+  .theme-dark [style*="border-top: 3px solid #FF54B0"],
+  .theme-dark [style*="border-top: 3px solid #38BDF8"],
+  .theme-dark [style*="border-top: 3px solid #34D399"] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .theme-dark [style*="background: rgba(17, 24, 39, 0.7)"] {
+    background-color: #111827 !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Gantt Bars and Gradients print support */
+  [style*="linear-gradient"], [style*="background: linear-gradient"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
