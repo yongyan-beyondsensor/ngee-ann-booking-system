@@ -790,11 +790,21 @@ body {
 
   html, body {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: #090B12 !important; /* Keep navy edge if visible */
+    background: #090B12 !important;
     font-family: var(--font-body) !important;
+  }
+
+  #deck-container {
+    display: block !important;
+    width: 10in !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   .deck-controls {
@@ -807,12 +817,12 @@ body {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
-    page-break-before: always;
-    page-break-after: always;
-    page-break-inside: avoid;
-    break-before: page;
-    break-after: page;
-    break-inside: avoid;
+    page-break-before: auto !important;
+    break-before: auto !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
     width: 10in !important;
     height: 7.5in !important;
     min-width: 10in !important;
@@ -827,10 +837,11 @@ body {
     position: relative !important;
   }
 
-  /* Avoid initial extra blank page before first slide */
-  .slide-viewport:first-of-type {
-    page-break-before: auto !important;
-    break-before: auto !important;
+  /* Avoid trailing blank page after last slide */
+  .slide-viewport:last-of-type,
+  .slide-viewport:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
   }
 
   /* Enforce theme-dark cover and ending backgrounds */
